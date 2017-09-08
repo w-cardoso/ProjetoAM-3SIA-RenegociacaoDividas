@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Renegociar Dividas</string>
+    <string name="main_edt_cpf">CPF</string>
+    <string name="main_edt_senha">Senha</string>
+    <string name="main_edt_entrar">Entrar</string>
+    <string name="main_txt_cadastrar">Ainda não possui cadastro? Clique aqui</string>
+    <string name="cadastrar_edt_nome">Nome</string>
+    <string name="cadastrar_edt_cpf">CPF</string>
+    <string name="cadastrar_edt_email">Email</string>
+    <string name="cadastrar_edt_senha">Senha</string>
+    <string name="cadastrar_edt_telefone">Telefone</string>
+    <string name="err_msg_nome">O campo nome está vazio</string>
+    <string name="err_msg_cpf">O CPF digitado é invalido</string>
+    <string name="err_msg_email">Digite um email Valido</string>
+    <string name="err_msg_senha">Digite uma senha</string>
+    <string name="err_msg_telefone">Digite seu numero de telefone</string>
+</resources>
