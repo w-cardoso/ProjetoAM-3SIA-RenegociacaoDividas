@@ -93,6 +93,9 @@ public class TelaCadastroActivity extends AppCompatActivity {
         if (edtTelefone.getText().toString().trim().isEmpty()){
             tilTelefone.setError(getString(R.string.err_msg_telefone));
         }
+        else{
+            tilTelefone.setErrorEnabled(false);
+        }
         return true;
     }
 
