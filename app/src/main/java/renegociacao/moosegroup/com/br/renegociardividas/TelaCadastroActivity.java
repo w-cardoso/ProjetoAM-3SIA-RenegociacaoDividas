@@ -12,10 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import renegociacao.moosegroup.com.br.renegociardividas.Model.ClienteModel;
+
 public class TelaCadastroActivity extends AppCompatActivity {
 
     private EditText edtNome, edtCpf, edtEmail, edtSenha, edtTelefone;
     private TextInputLayout tilNome, tilCpf, tilEmail, tilSenha, tilTelefone;
+    private ClienteModel cliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,7 @@ public class TelaCadastroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 submitForm();
+                pegaDadosCliente();
             }
         });
 
@@ -62,6 +66,15 @@ public class TelaCadastroActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public ClienteModel pegaDadosCliente(){
+        cliente.setNome(edtNome.getText().toString());
+        cliente.setCpf(edtCpf.getText().toString());
+        cliente.setEmail(edtEmail.getText().toString());
+        cliente.setSenha(edtSenha.getText().toString());
+        cliente.setTelefone(edtTelefone.getText().toString());
+        return cliente;
     }
 
     private void submitForm() {
