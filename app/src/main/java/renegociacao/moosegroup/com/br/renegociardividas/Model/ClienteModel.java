@@ -1,5 +1,7 @@
 package renegociacao.moosegroup.com.br.renegociardividas.Model;
 
+import java.util.List;
+
 /**
  * Created by re034850 on 10/09/2017.
  */
@@ -10,6 +12,15 @@ public class ClienteModel {
     private String email;
     private String senha;
     private String telefone;
+    private List<DividaModel> divida;
+
+    public List<DividaModel> getDivida() {
+        return divida;
+    }
+
+    public void setDivida(List<DividaModel> divida) {
+        this.divida = divida;
+    }
 
     public String getNome() {
         return nome;
@@ -50,4 +61,6 @@ public class ClienteModel {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+
 }

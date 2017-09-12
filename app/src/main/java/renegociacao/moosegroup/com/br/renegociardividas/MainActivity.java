@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity {
                     tilCpf.setErrorEnabled(false);
                 }
 
+                Intent telaInicial = new Intent(MainActivity.this, TelaInicialActivity.class);
+                startActivity(telaInicial);
+
             }
         });
 
