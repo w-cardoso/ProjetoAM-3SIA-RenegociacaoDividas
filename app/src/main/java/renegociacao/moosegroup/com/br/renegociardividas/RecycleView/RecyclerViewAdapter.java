@@ -35,7 +35,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public void onBindViewHolder(RecyclerViewHolders holder, int position) {
         holder.txtTitulo.setText(itemList.get(position).getTitulo());
         holder.txtDescricao.setText(itemList.get(position).getDescricao());
-        holder.txtValor.setText(Double.toString(itemList.get(position).getValor()));
+        holder.txtValor.setText("R$ "+Double.toString(itemList.get(position).getValor()));
         holder.txtUrl.setText(itemList.get(position).getUrl());
         holder.imgFotoEmpresa.setImageResource(itemList.get(position).getFotoEmpresa());
     }

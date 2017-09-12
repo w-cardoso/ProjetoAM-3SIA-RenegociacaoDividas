@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -42,13 +43,17 @@ public class TelaInicialActivity extends AppCompatActivity {
             total += rowListItem.get(i).getValor();
         }
 
-        txtValorTotal.setText(Double.toString(total));
+        txtValorTotal.setText("R$ "+Double.toString(total));
+
 
     }
 
     private List<DividaModel> getAllItemList() {
         List<DividaModel> allItems = new ArrayList<DividaModel>();
 
+        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", "www.itau.com.br", 1222.35, "Itau", R.drawable.itau));
+        allItems.add(new DividaModel("Apartamento", "Divida referente a chaves do apartamento", "www.caixa.com.br", 12332.99, "Caixa Economica", R.drawable.caixa));
+        allItems.add(new DividaModel("Emprestimo Consignado", "Empréstimo realizado em 2012, não foi pago nenhuma parcela", "www.bradesco.com.br", 5600.00, "Bradesco", R.drawable.bradesco));
         allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", "www.itau.com.br", 1222.35, "Itau", R.drawable.itau));
         allItems.add(new DividaModel("Apartamento", "Divida referente a chaves do apartamento", "www.caixa.com.br", 12332.99, "Caixa Economica", R.drawable.caixa));
         allItems.add(new DividaModel("Emprestimo Consignado", "Empréstimo realizado em 2012, não foi pago nenhuma parcela", "www.bradesco.com.br", 5600.00, "Bradesco", R.drawable.bradesco));
