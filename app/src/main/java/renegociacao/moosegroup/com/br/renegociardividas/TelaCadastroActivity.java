@@ -1,9 +1,15 @@
+
 package renegociacao.moosegroup.com.br.renegociardividas;
 
+import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,10 +18,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import renegociacao.moosegroup.com.br.renegociardividas.DAO.ClienteDAO;
 import renegociacao.moosegroup.com.br.renegociardividas.Model.ClienteModel;
 
 public class TelaCadastroActivity extends AppCompatActivity {
-
+    SQLiteOpenHelper openHelper;
+    SQLiteDatabase db;
     private EditText edtNome, edtCpf, edtEmail, edtSenha, edtTelefone;
     private TextInputLayout tilNome, tilCpf, tilEmail, tilSenha, tilTelefone;
     private ClienteModel cliente;
@@ -27,6 +35,8 @@ public class TelaCadastroActivity extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         ab.hide();
+
+        openHelper = new ClienteDAO(this);
 
         tilNome = (TextInputLayout) findViewById(R.id.cadastrar_til_nome);
         tilCpf = (TextInputLayout) findViewById(R.id.cadastrar_til_cpf);
@@ -53,12 +63,57 @@ public class TelaCadastroActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submitForm();
-                pegaDadosCliente();
+                boolean cpfValido = Validator.validateCPF(edtCpf.getText().toString());
+
+                if (validateName() && validateCpf()&& cpfValido == true && validateEmail() && validatePassword() && validateTelefone() ) {
+                    db = openHelper.getWritableDatabase();
+
+                    String nome = edtNome.getText().toString();
+                    String cpf = edtCpf.getText().toString();
+                    String email = edtEmail.getText().toString();
+                    String senha = edtSenha.getText().toString();
+                    String telefone = edtTelefone.getText().toString();
+
+                    inserirCliente(nome, cpf, email, senha, telefone);
+
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(TelaCadastroActivity.this);
+                    builder.setTitle("Informação");
+                    builder.setMessage("Sua conta foi criada com sucesso");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                            finish();
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+
+                } else {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(TelaCadastroActivity.this);
+                    builder.setTitle("Informação");
+                    builder.setMessage("Sua conta não foi criada, favor preencher os campos indicados");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
             }
+
+
         });
 
-        btnCancelar.setOnClickListener(new View.OnClickListener() {
+        btnCancelar.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
             public void onClick(View view) {
                 Intent cancelar = new Intent(TelaCadastroActivity.this, MainActivity.class);
@@ -68,14 +123,6 @@ public class TelaCadastroActivity extends AppCompatActivity {
 
     }
 
-    public ClienteModel pegaDadosCliente(){
-        cliente.setNome(edtNome.getText().toString());
-        cliente.setCpf(edtCpf.getText().toString());
-        cliente.setEmail(edtEmail.getText().toString());
-        cliente.setSenha(edtSenha.getText().toString());
-        cliente.setTelefone(edtTelefone.getText().toString());
-        return cliente;
-    }
 
     private void submitForm() {
         if (!validateName()) {
@@ -83,7 +130,7 @@ public class TelaCadastroActivity extends AppCompatActivity {
         }
 
 
-        if (!validateCpf()){
+        if (!validateCpf()) {
             return;
         }
 
@@ -95,7 +142,7 @@ public class TelaCadastroActivity extends AppCompatActivity {
             return;
         }
 
-        if (!validateTelefone()){
+        if (!validateTelefone()) {
             return;
         }
 
@@ -103,10 +150,9 @@ public class TelaCadastroActivity extends AppCompatActivity {
     }
 
     private boolean validateTelefone() {
-        if (edtTelefone.getText().toString().trim().isEmpty()){
+        if (edtTelefone.getText().toString().trim().isEmpty()) {
             tilTelefone.setError(getString(R.string.err_msg_telefone));
-        }
-        else{
+        } else {
             tilTelefone.setErrorEnabled(false);
         }
         return true;
@@ -150,22 +196,31 @@ public class TelaCadastroActivity extends AppCompatActivity {
         return true;
     }
 
-    private boolean validateCpf(){
+    private boolean validateCpf() {
         boolean cpfValido = Validator.validateCPF(edtCpf.getText().toString().trim());
-        if (!cpfValido) {
+        String cpf = edtCpf.getText().toString();
+        if (!cpfValido || cpf.isEmpty()) {
             tilCpf.setError(getString(R.string.err_msg_cpf));
             requestFocus(edtCpf);
-        }else{
+        } else {
             tilCpf.setErrorEnabled(false);
         }
         return true;
     }
 
 
-
-
     private static boolean isValidEmail(String email) {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
+
+    private void inserirCliente(String nome, String cpf, String email, String senha, String telefone) {
+        ContentValues values = new ContentValues();
+        values.put(ClienteDAO.COLUNA_NOME, nome);
+        values.put(ClienteDAO.COLUNA_CPF, cpf);
+        values.put(ClienteDAO.COLUNA_EMAIL, email);
+        values.put(ClienteDAO.COLUNA_SENHA, senha);
+        values.put(ClienteDAO.COLUNA_TELEFONE, telefone);
+        long id = db.insert(ClienteDAO.TABELA_NOME, null, values);
     }
 
     private void requestFocus(View view) {
