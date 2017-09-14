@@ -1,11 +1,8 @@
 
 package renegociacao.moosegroup.com.br.renegociardividas;
 
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
@@ -22,11 +19,12 @@ import renegociacao.moosegroup.com.br.renegociardividas.DAO.ClienteDAO;
 import renegociacao.moosegroup.com.br.renegociardividas.Model.ClienteModel;
 
 public class TelaCadastroActivity extends AppCompatActivity {
-    SQLiteOpenHelper openHelper;
-    SQLiteDatabase db;
+
     private EditText edtNome, edtCpf, edtEmail, edtSenha, edtTelefone;
     private TextInputLayout tilNome, tilCpf, tilEmail, tilSenha, tilTelefone;
     private ClienteModel cliente;
+    private FormularioHelper helper;
+    private ClienteDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +34,11 @@ public class TelaCadastroActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.hide();
 
-        openHelper = new ClienteDAO(this);
+        helper = new FormularioHelper(this);
+
+        Intent intent = getIntent();
+        ClienteModel aluno = (ClienteModel) intent.getSerializableExtra("cliente");
+
 
         tilNome = (TextInputLayout) findViewById(R.id.cadastrar_til_nome);
         tilCpf = (TextInputLayout) findViewById(R.id.cadastrar_til_cpf);
@@ -60,21 +62,22 @@ public class TelaCadastroActivity extends AppCompatActivity {
         Button btnCadastrar = (Button) findViewById(R.id.cadastrar_btn_cadastrar);
         Button btnCancelar = (Button) findViewById(R.id.cadastrar_btn_cancelar);
 
+
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 boolean cpfValido = Validator.validateCPF(edtCpf.getText().toString());
 
-                if (validateName() && validateCpf()&& cpfValido == true && validateEmail() && validatePassword() && validateTelefone() ) {
-                    db = openHelper.getWritableDatabase();
+                if (!edtTelefone.getText().toString().isEmpty() && validateName() && validateCpf() && cpfValido == true && validateEmail() && validatePassword() && validateTelefone()) {
 
-                    String nome = edtNome.getText().toString();
-                    String cpf = edtCpf.getText().toString();
-                    String email = edtEmail.getText().toString();
-                    String senha = edtSenha.getText().toString();
-                    String telefone = edtTelefone.getText().toString();
 
-                    inserirCliente(nome, cpf, email, senha, telefone);
+                    ClienteModel cliente = helper.pegaCliente();
+                    dao = new ClienteDAO(TelaCadastroActivity.this);
+                    dao.inserir(cliente);
+                    dao.close();
+
+                    Toast.makeText(TelaCadastroActivity.this, "Cliente " + cliente.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
+
 
                     final AlertDialog.Builder builder = new AlertDialog.Builder(TelaCadastroActivity.this);
                     builder.setTitle("Informação");
@@ -94,7 +97,7 @@ public class TelaCadastroActivity extends AppCompatActivity {
                 } else {
                     final AlertDialog.Builder builder = new AlertDialog.Builder(TelaCadastroActivity.this);
                     builder.setTitle("Informação");
-                    builder.setMessage("Sua conta não foi criada, favor preencher os campos indicados");
+                    builder.setMessage("Sua conta não foi criada, todos os campos devem ser preenchidos");
                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -146,12 +149,13 @@ public class TelaCadastroActivity extends AppCompatActivity {
             return;
         }
 
-        Toast.makeText(getApplicationContext(), "Thank You!", Toast.LENGTH_SHORT).show();
+
     }
 
     private boolean validateTelefone() {
-        if (edtTelefone.getText().toString().trim().isEmpty()) {
+        if (edtTelefone.getText().toString().isEmpty()) {
             tilTelefone.setError(getString(R.string.err_msg_telefone));
+            requestFocus(edtTelefone);
         } else {
             tilTelefone.setErrorEnabled(false);
         }
@@ -213,15 +217,6 @@ public class TelaCadastroActivity extends AppCompatActivity {
         return !TextUtils.isEmpty(email) && android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
-    private void inserirCliente(String nome, String cpf, String email, String senha, String telefone) {
-        ContentValues values = new ContentValues();
-        values.put(ClienteDAO.COLUNA_NOME, nome);
-        values.put(ClienteDAO.COLUNA_CPF, cpf);
-        values.put(ClienteDAO.COLUNA_EMAIL, email);
-        values.put(ClienteDAO.COLUNA_SENHA, senha);
-        values.put(ClienteDAO.COLUNA_TELEFONE, telefone);
-        long id = db.insert(ClienteDAO.TABELA_NOME, null, values);
-    }
 
     private void requestFocus(View view) {
         if (view.requestFocus()) {

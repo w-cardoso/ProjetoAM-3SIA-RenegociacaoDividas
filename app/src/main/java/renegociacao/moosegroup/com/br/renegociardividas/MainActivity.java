@@ -1,6 +1,9 @@
 package renegociacao.moosegroup.com.br.renegociardividas;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
@@ -11,8 +14,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import renegociacao.moosegroup.com.br.renegociardividas.DAO.ClienteDAO;
+import renegociacao.moosegroup.com.br.renegociardividas.Model.ClienteModel;
+
 
 public class MainActivity extends AppCompatActivity {
+
+    SQLiteOpenHelper dbHelper;
+    SQLiteDatabase db;
+    Cursor cursor;
+    private EditText edtCpf;
+    private  TextInputLayout tilCpf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,28 +34,41 @@ public class MainActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.hide();
 
-        final TextInputLayout tilCpf = (TextInputLayout) findViewById(R.id.main_til_cpf);
-
-        final EditText edtCpf = (EditText) findViewById(R.id.main_edt_cpf);
+        edtCpf = (EditText) findViewById(R.id.main_edt_cpf);
         edtCpf.addTextChangedListener(Mask.insert(Mask.CPF_MASK, edtCpf));
+
+        final EditText edtSenha = (EditText) findViewById(R.id.main_edt_password);
+        tilCpf = (TextInputLayout) findViewById(R.id.main_til_cpf);
 
         Button btnEntrar = (Button) findViewById(R.id.main_btn_entrar);
         TextView txtCadastrar = (TextView) findViewById(R.id.main_txt_cadastrar);
+
+
+        final ClienteModel cliente = new ClienteModel();
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 boolean cpfValido = Validator.validateCPF(edtCpf.getText().toString().trim());
-                if (!cpfValido) {
-                    tilCpf.setError("Digite um CPF válido");
+                String cpf = edtCpf.getText().toString();
+                if (!cpfValido || cpf.isEmpty()) {
+                    tilCpf.setError(getString(R.string.err_msg_cpf));
                     requestFocus(edtCpf);
-                }else{
+                } else {
                     tilCpf.setErrorEnabled(false);
                 }
 
-                Intent telaInicial = new Intent(MainActivity.this, TelaInicialActivity.class);
-                startActivity(telaInicial);
+
+                
+                cliente.setCpf(edtCpf.getText().toString());
+                cliente.setSenha(edtSenha.getText().toString());
+
+                if (cliente.getCpf().equalsIgnoreCase("380.690.968-70") && cliente.getSenha().equalsIgnoreCase("22")) {
+                    Intent telaEntrar = new Intent(MainActivity.this, TelaInicialActivity.class);
+                    startActivity(telaEntrar);
+                }
+
 
             }
         });
@@ -61,6 +86,18 @@ public class MainActivity extends AppCompatActivity {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
         }
+    }
+
+    private boolean validateCpf() {
+        boolean cpfValido = Validator.validateCPF(edtCpf.getText().toString().trim());
+        String cpf = edtCpf.getText().toString();
+        if (!cpfValido || cpf.isEmpty()) {
+            tilCpf.setError(getString(R.string.err_msg_cpf));
+            requestFocus(edtCpf);
+        } else {
+            tilCpf.setErrorEnabled(false);
+        }
+        return true;
     }
 
 
