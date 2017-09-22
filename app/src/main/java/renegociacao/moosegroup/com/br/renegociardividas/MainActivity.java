@@ -64,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
                 cliente.setCpf(edtCpf.getText().toString());
                 cliente.setSenha(edtSenha.getText().toString());
 
-                if (cliente.getCpf().equalsIgnoreCase("380.690.968-70") && cliente.getSenha().equalsIgnoreCase("22")) {
-                    Intent telaEntrar = new Intent(MainActivity.this, TelaInicialActivity.class);
+
+                    Intent telaEntrar = new Intent(MainActivity.this, MenuActivity.class);
                     startActivity(telaEntrar);
-                }
+
 
 
             }

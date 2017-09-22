@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RenegociarDividas.iml" filepath="$PROJECT_DIR$/RenegociarDividas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProjetoAM-3SIA-RenegociacaoDividas.iml" filepath="$PROJECT_DIR$/ProjetoAM-3SIA-RenegociacaoDividas.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".TelaCadastroActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".TelaInicialActivity"></activity>
+        <activity android:name=".TelaInicialActivity" />
+        <activity android:name=".MenuActivity"></activity>
     </application>
 
 </manifest>
