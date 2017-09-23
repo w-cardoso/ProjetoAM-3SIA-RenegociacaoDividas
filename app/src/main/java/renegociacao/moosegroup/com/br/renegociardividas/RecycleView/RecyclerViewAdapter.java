@@ -19,7 +19,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     private List<DividaModel> itemList;
     private Context context;
 
-    public RecyclerViewAdapter(Context context,List<DividaModel> itemList)  {
+    public RecyclerViewAdapter(Context context, List<DividaModel> itemList) {
         this.itemList = itemList;
         this.context = context;
     }
@@ -34,9 +34,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @Override
     public void onBindViewHolder(RecyclerViewHolders holder, int position) {
         holder.txtTitulo.setText(itemList.get(position).getTitulo());
-        holder.txtDescricao.setText(itemList.get(position).getDescricao());
-        holder.txtValor.setText("R$ "+Double.toString(itemList.get(position).getValor()));
-        holder.txtUrl.setText(itemList.get(position).getUrl());
+
+        holder.txtValor.setText("R$ " + Double.toString(itemList.get(position).getValor()));
+
         holder.imgFotoEmpresa.setImageResource(itemList.get(position).getFotoEmpresa());
     }
 

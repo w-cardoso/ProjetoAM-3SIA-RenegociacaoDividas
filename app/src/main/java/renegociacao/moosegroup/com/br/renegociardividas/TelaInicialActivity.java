@@ -1,6 +1,7 @@
 package renegociacao.moosegroup.com.br.renegociardividas;
 
 import android.content.Context;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +28,9 @@ public class TelaInicialActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_inicial);
+
+        ActionBar ab = getSupportActionBar();
+        ab.hide();
 
         List<DividaModel> rowListItem = getAllItemList();
         lLayout = new LinearLayoutManager(TelaInicialActivity.this);
