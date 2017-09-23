@@ -4,19 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_color5"
     android:orientation="vertical"
     tools:context="renegociacao.moosegroup.com.br.renegociardividas.MenuActivity">
 
 
-    <RelativeLayout
-        android:id="@+id/relative1"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Seja Bem-Vindo"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/menu_txt_nomeCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:text="Cliente TOPEIN"
+        android:textSize="18sp" />
+
+    <GridLayout
+        android:id="@+id/menu_gridLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:orientation="horizontal">
+        android:columnCount="2"
+        android:orientation="horizontal"
+        android:rowCount="2">
 
         <android.support.v7.widget.CardView
+            android:id="@+id/menu_cardView_listaDeDividas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
@@ -24,23 +48,25 @@
             card_view:cardMaxElevation="15dp">
 
             <LinearLayout
-                android:background="@drawable/background_color4"
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:background="@drawable/background_color5"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_margin="16dp"
-                    android:id="@+id/imageView2"
+                    android:id="@+id/menu_img_listaDividas"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
                     android:src="@drawable/ic_cadastrar" />
 
                 <TextView
-                    android:layout_marginBottom="10dp"
+                    android:id="@+id/menu_txt_listaDividas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:text="Lista de Dividas" />
 
@@ -49,6 +75,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/menu_cardView_cadastrarDividas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -60,9 +87,9 @@
             card_view:cardMaxElevation="15dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_color4"
+                android:background="@drawable/background_color5"
                 android:orientation="vertical">
 
                 <ImageView
@@ -72,12 +99,12 @@
                     android:src="@drawable/ic_pag" />
 
                 <TextView
-                    android:layout_marginTop="16dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="16dp"
                     android:gravity="center"
                     android:text="Cadastrar Dividas" />
 
@@ -85,40 +112,34 @@
 
         </android.support.v7.widget.CardView>
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/relative2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:orientation="horizontal">
 
         <android.support.v7.widget.CardView
-            android:background="@drawable/background_color5"
+            android:id="@+id/menu_cardView_parceiros"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:background="@drawable/background_color5"
             card_view:cardElevation="10dp"
             card_view:cardMaxElevation="15dp">
 
             <LinearLayout
-                android:background="@drawable/background_color4"
-                android:layout_width="match_parent"
+                android:layout_width="140dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:background="@drawable/background_color5"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_margin="16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
                     android:src="@drawable/ic_parceiro" />
 
                 <TextView
-                    android:layout_marginBottom="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:text="Parceiros" />
 
@@ -127,6 +148,7 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
+            android:id="@+id/menu_cardView_sair"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -138,9 +160,9 @@
             card_view:cardMaxElevation="15dp">
 
             <LinearLayout
-                android:background="@drawable/background_color4"
-                android:layout_width="128dp"
+                android:layout_width="140dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/background_color5"
                 android:orientation="vertical">
 
                 <ImageView
@@ -152,10 +174,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
                     android:layout_marginBottom="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginTop="15dp"
                     android:gravity="center"
                     android:text="Sair" />
 
@@ -163,7 +185,7 @@
 
         </android.support.v7.widget.CardView>
 
-    </RelativeLayout>
+    </GridLayout>
 
 
 </LinearLayout>
