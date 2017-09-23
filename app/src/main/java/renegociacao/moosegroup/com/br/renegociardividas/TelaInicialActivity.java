@@ -1,20 +1,21 @@
 package renegociacao.moosegroup.com.br.renegociardividas;
 
 import android.content.Context;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.EditText;
+import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 import renegociacao.moosegroup.com.br.renegociardividas.Model.DividaModel;
-import renegociacao.moosegroup.com.br.renegociardividas.R;
+import renegociacao.moosegroup.com.br.renegociardividas.RecycleView.RecyclerItemClickListener;
 import renegociacao.moosegroup.com.br.renegociardividas.RecycleView.RecyclerViewAdapter;
 
 public class TelaInicialActivity extends AppCompatActivity {
@@ -43,11 +44,40 @@ public class TelaInicialActivity extends AppCompatActivity {
 
         txtValorTotal = (TextView) findViewById(R.id.telaInicial_txt_total);
 
-        for (int i = 0; i < rowListItem.size(); i++){
+        for (int i = 0; i < rowListItem.size(); i++) {
             total += rowListItem.get(i).getValor();
         }
 
-        txtValorTotal.setText("R$ "+Double.toString(total));
+        txtValorTotal.setText("R$ " + Double.toString(total));
+
+        rView.addOnItemTouchListener(new RecyclerItemClickListener(context, rView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                switch (position) {
+                    case 0:
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(TelaInicialActivity.this);
+                        builder.setTitle("Descrição");
+                        builder.setMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper erat libero, eu rhoncus massa fringilla vel. Nunc elit mi, sodales et malesuada nec, sagittis id ipsum. Curabitur ut lacinia velit. Mauris pharetra sem vitae justo elementum, sed viverra ligula consectetur. Sed aliquet nibh a rhoncus tempor. Nunc euismod mauris non dolor malesuada maximus. Fusce mattis risus et lectus bibendum mollis. Mauris molestie ut libero eu consectetur. Donec eu placerat orci, id suscipit ante. Sed nulla nisl, aliquet tempor pretium eget, commodo ac sapien.");
+                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.dismiss();
+                                finish();
+                            }
+                        });
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        break;
+
+                }
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+
+            }
+        }));
 
 
     }
