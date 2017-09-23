@@ -19,7 +19,9 @@
         <activity android:name=".TelaCadastroActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".TelaInicialActivity" />
-        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".MenuActivity" />
+        <activity android:name=".CadastrarDividasActivity" />
+        <activity android:name=".ParceirosActivity"></activity>
     </application>
 
 </manifest>
