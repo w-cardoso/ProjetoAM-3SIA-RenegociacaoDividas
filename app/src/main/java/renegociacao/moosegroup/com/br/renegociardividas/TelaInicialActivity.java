@@ -53,23 +53,25 @@ public class TelaInicialActivity extends AppCompatActivity {
         rView.addOnItemTouchListener(new RecyclerItemClickListener(context, rView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                switch (position) {
-                    case 0:
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(TelaInicialActivity.this);
-                        builder.setTitle("Descrição");
-                        builder.setMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper erat libero, eu rhoncus massa fringilla vel. Nunc elit mi, sodales et malesuada nec, sagittis id ipsum. Curabitur ut lacinia velit. Mauris pharetra sem vitae justo elementum, sed viverra ligula consectetur. Sed aliquet nibh a rhoncus tempor. Nunc euismod mauris non dolor malesuada maximus. Fusce mattis risus et lectus bibendum mollis. Mauris molestie ut libero eu consectetur. Donec eu placerat orci, id suscipit ante. Sed nulla nisl, aliquet tempor pretium eget, commodo ac sapien.");
-                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                                finish();
-                            }
-                        });
+                if (view.getId() == R.id.cardViewAdapter) {
+                    switch (position) {
+                        case 0:
+                            final AlertDialog.Builder builder = new AlertDialog.Builder(TelaInicialActivity.this);
+                            builder.setTitle("Descrição");
+                            builder.setMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper erat libero, eu rhoncus massa fringilla vel. Nunc elit mi, sodales et malesuada nec, sagittis id ipsum. Curabitur ut lacinia velit. Mauris pharetra sem vitae justo elementum, sed viverra ligula consectetur. Sed aliquet nibh a rhoncus tempor. Nunc euismod mauris non dolor malesuada maximus. Fusce mattis risus et lectus bibendum mollis. Mauris molestie ut libero eu consectetur. Donec eu placerat orci, id suscipit ante. Sed nulla nisl, aliquet tempor pretium eget, commodo ac sapien.");
+                            builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                    finish();
+                                }
+                            });
 
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                        break;
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                            break;
 
+                    }
                 }
             }
 

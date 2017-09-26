@@ -1,16 +1,21 @@
 package renegociacao.moosegroup.com.br.renegociardividas;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
-import android.view.View;
+import android.widget.Toast;
+
+import com.hitomi.cmlibrary.CircleMenu;
+import com.hitomi.cmlibrary.OnMenuSelectedListener;
+import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 
 public class MenuActivity extends AppCompatActivity {
-    private CardView listaDividas;
-    private CardView cadastrarDividas;
-    private CardView parceiros;
-    private CardView sair;
+    String arrayTelas[] = {"Lista de Dividas",
+            "Cadastrar Dividas",
+            "Parceiros",
+            "Sair"};
+    int selectedIdex;
 
 
     @Override
@@ -18,42 +23,51 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        listaDividas = (CardView) findViewById(R.id.menu_cardView_listaDeDividas);
-        cadastrarDividas = (CardView) findViewById(R.id.menu_cardView_cadastrarDividas);
-        parceiros = (CardView) findViewById(R.id.menu_cardView_parceiros);
-        sair = (CardView) findViewById(R.id.menu_cardView_sair);
+        CircleMenu circleMenu = (CircleMenu) findViewById(R.id.menu_circleMenu);
+        circleMenu.setMainMenu(Color.parseColor("#CDCDCD"), R.drawable.add_song, R.drawable.cancel)
+                .addSubMenu(Color.parseColor("#87CEFA"), R.drawable.lista_dividas)
+                .addSubMenu(Color.parseColor("#0000FF"), R.drawable.cadastrar)
+                .addSubMenu(Color.parseColor("#00FF7F"), R.drawable.parceiros)
+                .addSubMenu(Color.parseColor("#FFA500"), R.drawable.sair)
+                .setOnMenuSelectedListener(new OnMenuSelectedListener() {
+                                               @Override
+                                               public void onMenuSelected(int i) {
+                                                   Toast.makeText(MenuActivity.this, "Você selecionou " + arrayTelas[i], Toast.LENGTH_SHORT).show();
+                                                   selectedIdex = i;
+                                               }
+                                           }
 
-        listaDividas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent irDividas = new Intent(MenuActivity.this, TelaInicialActivity.class);
-                startActivity(irDividas);
-            }
-        });
+                )
+                .setOnMenuStatusChangeListener(new OnMenuStatusChangeListener() {
+                    @Override
+                    public void onMenuOpened() {
+                    }
 
-        cadastrarDividas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent telacadastrarD = new Intent(MenuActivity.this, CadastrarDividasActivity.class);
-                startActivity(telacadastrarD);
-            }
-        });
+                    @Override
+                    public void onMenuClosed() {
+                        switch (selectedIdex) {
+                            case 0:
+                                Intent listaDividas = new Intent(MenuActivity.this, TelaInicialActivity.class);
+                                startActivity(listaDividas);
+                                break;
+                            case 1:
+                                Intent cadastrarDividas = new Intent(MenuActivity.this, CadastrarDividasActivity.class);
+                                startActivity(cadastrarDividas);
+                                break;
+                            case 2:
+                                Intent parceiros = new Intent(MenuActivity.this, ParceirosActivity.class);
+                                startActivity(parceiros);
+                                break;
+                            case 3:
+                                System.exit(0);
+                                break;
 
-        parceiros.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent telaParceiro = new Intent(MenuActivity.this, ParceirosActivity.class);
-                startActivity(telaParceiro);
-            }
-        });
-
-        sair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                System.exit(1);
-            }
-        });
-
+                        }
+                    }
+                });
 
     }
+
+
 }
+
