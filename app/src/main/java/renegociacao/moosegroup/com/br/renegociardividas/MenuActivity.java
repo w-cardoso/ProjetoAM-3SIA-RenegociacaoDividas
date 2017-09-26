@@ -15,7 +15,7 @@ public class MenuActivity extends AppCompatActivity {
             "Cadastrar Dividas",
             "Parceiros",
             "Sair"};
-    int selectedIdex;
+    int selectedIdex = 14;
 
 
     @Override
@@ -30,12 +30,12 @@ public class MenuActivity extends AppCompatActivity {
                 .addSubMenu(Color.parseColor("#00FF7F"), R.drawable.parceiros)
                 .addSubMenu(Color.parseColor("#FFA500"), R.drawable.sair)
                 .setOnMenuSelectedListener(new OnMenuSelectedListener() {
-                                               @Override
-                                               public void onMenuSelected(int i) {
-                                                   Toast.makeText(MenuActivity.this, "Você selecionou " + arrayTelas[i], Toast.LENGTH_SHORT).show();
-                                                   selectedIdex = i;
+                    @Override
+                    public void onMenuSelected(int i) {
+                        Toast.makeText(MenuActivity.this, "Você selecionou " + arrayTelas[i], Toast.LENGTH_SHORT).show();
+                        selectedIdex = i;
+                    }
                                                }
-                                           }
 
                 )
                 .setOnMenuStatusChangeListener(new OnMenuStatusChangeListener() {
@@ -49,19 +49,25 @@ public class MenuActivity extends AppCompatActivity {
                             case 0:
                                 Intent listaDividas = new Intent(MenuActivity.this, TelaInicialActivity.class);
                                 startActivity(listaDividas);
+                                selectedIdex = 14;
                                 break;
                             case 1:
                                 Intent cadastrarDividas = new Intent(MenuActivity.this, CadastrarDividasActivity.class);
                                 startActivity(cadastrarDividas);
+                                selectedIdex = 14;
                                 break;
                             case 2:
                                 Intent parceiros = new Intent(MenuActivity.this, ParceirosActivity.class);
                                 startActivity(parceiros);
+                                selectedIdex = 14;
                                 break;
                             case 3:
                                 System.exit(0);
+                                selectedIdex = 14;
                                 break;
+                            default:
 
+                                break;
                         }
                     }
                 });
