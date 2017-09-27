@@ -10,7 +10,7 @@ public class DividaModel {
     private String url;
     private double valor;
     private String empresa;
-    private int fotoEmpresa;
+
 
 
     public DividaModel(String titulo, String descricao, String url, double valor, String empresa, int fotoEmpresa) {
@@ -19,7 +19,7 @@ public class DividaModel {
         this.url = url;
         this.valor = valor;
         this.empresa = empresa;
-        this.fotoEmpresa = fotoEmpresa;
+
     }
 
 
@@ -64,11 +64,5 @@ public class DividaModel {
         this.empresa = empresa;
     }
 
-    public int getFotoEmpresa() {
-        return fotoEmpresa;
-    }
 
-    public void setFotoEmpresa(int fotoEmpresa) {
-        this.fotoEmpresa = fotoEmpresa;
-    }
 }

@@ -37,7 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
         holder.txtValor.setText("R$ " + Double.toString(itemList.get(position).getValor()));
 
-        holder.imgFotoEmpresa.setImageResource(itemList.get(position).getFotoEmpresa());
+
     }
 
     @Override

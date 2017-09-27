@@ -1,5 +1,5 @@
 
-package renegociacao.moosegroup.com.br.renegociardividas;
+package renegociacao.moosegroup.com.br.renegociardividas.Ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,18 +13,20 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import renegociacao.moosegroup.com.br.renegociardividas.DAO.ClienteDAO;
+
+import renegociacao.moosegroup.com.br.renegociardividas.Mask;
 import renegociacao.moosegroup.com.br.renegociardividas.Model.ClienteModel;
+import renegociacao.moosegroup.com.br.renegociardividas.R;
+import renegociacao.moosegroup.com.br.renegociardividas.Validator;
 
 public class TelaCadastroActivity extends AppCompatActivity {
 
     private EditText edtNome, edtCpf, edtEmail, edtSenha, edtTelefone;
     private TextInputLayout tilNome, tilCpf, tilEmail, tilSenha, tilTelefone;
     private ClienteModel cliente;
-    private FormularioHelper helper;
-    private ClienteDAO dao;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,30 +36,10 @@ public class TelaCadastroActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.hide();
 
-        helper = new FormularioHelper(this);
-
-        Intent intent = getIntent();
-        ClienteModel aluno = (ClienteModel) intent.getSerializableExtra("cliente");
+        cliente = new ClienteModel();
 
 
-        tilNome = (TextInputLayout) findViewById(R.id.cadastrar_til_nome);
-        tilCpf = (TextInputLayout) findViewById(R.id.cadastrar_til_cpf);
-        tilEmail = (TextInputLayout) findViewById(R.id.cadastrar_til_email);
-        tilSenha = (TextInputLayout) findViewById(R.id.cadastrar_til_senha);
-        tilTelefone = (TextInputLayout) findViewById(R.id.cadastrar_til_telefone);
-
-
-        edtNome = (EditText) findViewById(R.id.cadastrar_edt_nome);
-
-        edtCpf = (EditText) findViewById(R.id.cadastrar_edt_cpf);
-        edtCpf.addTextChangedListener(Mask.insert(Mask.CPF_MASK, edtCpf));
-
-        edtEmail = (EditText) findViewById(R.id.cadastrar_edt_email);
-
-        edtSenha = (EditText) findViewById(R.id.cadastrar_edt_senha);
-
-        edtTelefone = (EditText) findViewById(R.id.cadastrar_edt_telefone);
-        edtTelefone.addTextChangedListener(Mask.insert(Mask.CELULAR_MASK, edtTelefone));
+        Cast();
 
         Button btnCadastrar = (Button) findViewById(R.id.cadastrar_btn_cadastrar);
         Button btnCancelar = (Button) findViewById(R.id.cadastrar_btn_cancelar);
@@ -66,32 +48,13 @@ public class TelaCadastroActivity extends AppCompatActivity {
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                submitForm();
                 boolean cpfValido = Validator.validateCPF(edtCpf.getText().toString());
 
                 if (!edtTelefone.getText().toString().isEmpty() && validateName() && validateCpf() && cpfValido == true && validateEmail() && validatePassword() && validateTelefone()) {
 
-
-                    ClienteModel cliente = helper.pegaCliente();
-                    dao = new ClienteDAO(TelaCadastroActivity.this);
-                    dao.inserir(cliente);
-                    dao.close();
-
-                    Toast.makeText(TelaCadastroActivity.this, "Cliente " + cliente.getNome() + " salvo!", Toast.LENGTH_SHORT).show();
-
-
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(TelaCadastroActivity.this);
-                    builder.setTitle("Informação");
-                    builder.setMessage("Sua conta foi criada com sucesso");
-                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-                            finish();
-                        }
-                    });
-
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                    PegarDadosDaTela();
+                    DialogPositivo();
 
 
                 } else {
@@ -126,12 +89,50 @@ public class TelaCadastroActivity extends AppCompatActivity {
 
     }
 
+    private void PegarDadosDaTela() {
+        cliente.setNome(edtNome.getText().toString());
+        cliente.setCpf(edtCpf.getText().toString());
+        cliente.setSenha(edtSenha.getText().toString());
+        cliente.setTelefone(edtTelefone.getText().toString());
+        cliente.setEmail(edtEmail.getText().toString());
+    }
+
+    private void DialogPositivo() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(TelaCadastroActivity.this);
+        builder.setTitle("Informação");
+        builder.setMessage("Sua conta foi criada com sucesso");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+                finish();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void Cast() {
+        tilNome = (TextInputLayout) findViewById(R.id.cadastrar_til_nome);
+        tilCpf = (TextInputLayout) findViewById(R.id.cadastrar_til_cpf);
+        tilEmail = (TextInputLayout) findViewById(R.id.cadastrar_til_email);
+        tilSenha = (TextInputLayout) findViewById(R.id.cadastrar_til_senha);
+        tilTelefone = (TextInputLayout) findViewById(R.id.cadastrar_til_telefone);
+        edtNome = (EditText) findViewById(R.id.cadastrar_edt_nome);
+        edtCpf = (EditText) findViewById(R.id.cadastrar_edt_cpf);
+        edtCpf.addTextChangedListener(Mask.insert(Mask.CPF_MASK, edtCpf));
+        edtEmail = (EditText) findViewById(R.id.cadastrar_edt_email);
+        edtSenha = (EditText) findViewById(R.id.cadastrar_edt_senha);
+        edtTelefone = (EditText) findViewById(R.id.cadastrar_edt_telefone);
+        edtTelefone.addTextChangedListener(Mask.insert(Mask.CELULAR_MASK, edtTelefone));
+    }
+
 
     private void submitForm() {
         if (!validateName()) {
             return;
         }
-
 
         if (!validateCpf()) {
             return;
@@ -176,7 +177,6 @@ public class TelaCadastroActivity extends AppCompatActivity {
 
     private boolean validateEmail() {
         String email = edtEmail.getText().toString().trim();
-
         if (email.isEmpty() || !isValidEmail(email)) {
             tilEmail.setError(getString(R.string.err_msg_email));
             requestFocus(edtEmail);

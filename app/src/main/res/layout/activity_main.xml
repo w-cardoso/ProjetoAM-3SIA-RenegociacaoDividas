@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_color5"
     android:orientation="vertical"
-    tools:context="renegociacao.moosegroup.com.br.renegociardividas.MainActivity">
+    tools:context="renegociacao.moosegroup.com.br.renegociardividas.Ui.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

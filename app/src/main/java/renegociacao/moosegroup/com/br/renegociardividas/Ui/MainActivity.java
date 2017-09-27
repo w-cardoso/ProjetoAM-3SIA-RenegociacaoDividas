@@ -1,4 +1,4 @@
-package renegociacao.moosegroup.com.br.renegociardividas;
+package renegociacao.moosegroup.com.br.renegociardividas.Ui;
 
 import android.content.Intent;
 import android.database.Cursor;
@@ -14,8 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import renegociacao.moosegroup.com.br.renegociardividas.DAO.ClienteDAO;
+import renegociacao.moosegroup.com.br.renegociardividas.Mask;
 import renegociacao.moosegroup.com.br.renegociardividas.Model.ClienteModel;
+import renegociacao.moosegroup.com.br.renegociardividas.R;
+import renegociacao.moosegroup.com.br.renegociardividas.Validator;
 
 
 public class MainActivity extends AppCompatActivity {

@@ -1,4 +1,4 @@
-package renegociacao.moosegroup.com.br.renegociardividas;
+package renegociacao.moosegroup.com.br.renegociardividas.Ui;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import renegociacao.moosegroup.com.br.renegociardividas.Model.DividaModel;
+import renegociacao.moosegroup.com.br.renegociardividas.R;
 import renegociacao.moosegroup.com.br.renegociardividas.RecycleView.RecyclerItemClickListener;
 import renegociacao.moosegroup.com.br.renegociardividas.RecycleView.RecyclerViewAdapter;
 

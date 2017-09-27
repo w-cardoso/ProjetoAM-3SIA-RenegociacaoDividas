@@ -24,6 +24,6 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder {
         this.context = itemView.getContext();
         txtTitulo = (TextView) itemView.findViewById(R.id.cardView_txtTitulo);
         txtValor = (TextView) itemView.findViewById(R.id.cardView_txtValor);
-        imgFotoEmpresa = itemView.findViewById(R.id.cardView_imgFotoEmpresa);
+
     }
 }

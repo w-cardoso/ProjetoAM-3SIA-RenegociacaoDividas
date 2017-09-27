@@ -9,19 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".Ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TelaCadastroActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".TelaInicialActivity" />
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".CadastrarDividasActivity" />
-        <activity android:name=".ParceirosActivity"></activity>
+        <activity android:name=".Ui.TelaCadastroActivity" />
+        <activity android:name=".Ui.MainActivity" />
+        <activity android:name=".Ui.TelaInicialActivity" />
+        <activity android:name=".Ui.MenuActivity" />
+        <activity android:name=".Ui.CadastrarDividasActivity" />
+        <activity android:name=".Ui.ParceirosActivity"></activity>
     </application>
 
 </manifest>

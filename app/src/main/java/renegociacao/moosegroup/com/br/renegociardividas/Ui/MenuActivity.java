@@ -1,4 +1,4 @@
-package renegociacao.moosegroup.com.br.renegociardividas;
+package renegociacao.moosegroup.com.br.renegociardividas.Ui;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,6 +9,8 @@ import android.widget.Toast;
 import com.hitomi.cmlibrary.CircleMenu;
 import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
+
+import renegociacao.moosegroup.com.br.renegociardividas.R;
 
 public class MenuActivity extends AppCompatActivity {
     String arrayTelas[] = {"Lista de Dividas",
