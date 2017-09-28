@@ -1,15 +1,36 @@
 package renegociacao.moosegroup.com.br.renegociardividas.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by re034850 on 10/09/2017.
  */
 
 public class ClienteModel {
-    private Long id;
+
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+
+    @SerializedName("nome")
+    @Expose
     private String nome;
+
+    @SerializedName("cpf")
+    @Expose
     private String cpf;
+
+    @SerializedName("email")
+    @Expose
     private String email;
+
+    @SerializedName("senha")
+    @Expose
     private String senha;
+
+    @SerializedName("telefone")
+    @Expose
     private String telefone;
 
 
@@ -53,11 +74,23 @@ public class ClienteModel {
         this.telefone = telefone;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "ClienteModel{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", telefone='" + telefone + '\'' +
+                '}';
     }
 }
