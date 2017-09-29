@@ -9,7 +9,7 @@ public class ApiUtils {
     private ApiUtils() {
     }
 
-    public static final String BASE_URL = "http://dividazero.azurewebsites.net/";
+    public static final String BASE_URL = "http://dividazero.azurewebsites.net/API/";
 
     public static APIService getAPIService() {
 
