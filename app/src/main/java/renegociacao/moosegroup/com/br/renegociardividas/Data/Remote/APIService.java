@@ -11,12 +11,11 @@ import retrofit2.http.POST;
 
 public interface APIService {
 
-    @POST("/API")
+    @POST("/Usuarios")
     @FormUrlEncoded
-    Call<POST> savePost(@Field("id") long id,
-                        @Field("name") String nome,
-                        @Field("cpf") String cpf,
-                        @Field("email") String email,
-                        @Field("senha") String senha,
-                        @Field("telefone") String telefone);
+    Call<POST> criarUsuario(@Field("Nome") String nome,
+                            @Field("Cpf") String cpf,
+                            @Field("Email") String email,
+                            @Field("Senha") String senha,
+                            @Field("Telefone") String telefone);
 }
