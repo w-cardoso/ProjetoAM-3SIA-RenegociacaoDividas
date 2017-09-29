@@ -32,7 +32,6 @@ public class TelaCadastroActivity extends AppCompatActivity {
     private EditText edtNome, edtCpf, edtEmail, edtSenha, edtTelefone;
     private TextInputLayout tilNome, tilCpf, tilEmail, tilSenha, tilTelefone;
     private ClienteModel cliente;
-    private APIService mAPIService;
     private TextView mResponseTv;
     private static final String TAG = "MainActivity";
 
@@ -47,11 +46,7 @@ public class TelaCadastroActivity extends AppCompatActivity {
 
         cliente = new ClienteModel();
 
-
         Cast();
-
-
-        mAPIService = ApiUtils.getAPIService();
 
         mResponseTv = (TextView) findViewById(R.id.tv_response);
         Button btnCadastrar = (Button) findViewById(R.id.cadastrar_btn_cadastrar);
@@ -67,16 +62,7 @@ public class TelaCadastroActivity extends AppCompatActivity {
                 if (!edtTelefone.getText().toString().isEmpty() && validateName() && validateCpf() && cpfValido == true && validateEmail() && validatePassword() && validateTelefone()) {
 
                     PegarDadosDaTela();
-
-
-                    String nome = edtNome.getText().toString().trim();
-                    String cpf = edtCpf.getText().toString().trim();
-                    String email = edtEmail.getText().toString().trim();
-                    String senha = edtSenha.getText().toString().trim();
-                    String telefone = edtTelefone.getText().toString().trim();
-
-                    sendPost(nome, cpf, email, senha, telefone);
-
+                    criarUsuario(cliente);
 
                 } else {
                     final AlertDialog.Builder builder = new AlertDialog.Builder(TelaCadastroActivity.this);
@@ -94,8 +80,6 @@ public class TelaCadastroActivity extends AppCompatActivity {
                     dialog.show();
                 }
             }
-
-
         });
 
         btnCancelar.setOnClickListener(new View.OnClickListener()
@@ -119,21 +103,24 @@ public class TelaCadastroActivity extends AppCompatActivity {
         cliente.setEmail(edtEmail.getText().toString());
     }
 
-    private void sendPost(String nome, String cpf, String email, String senha, String telefone) {
-        mAPIService.savePost(1, nome, cpf, email, senha, telefone).enqueue(new Callback<POST>() {
-            @Override
-            public void onResponse(Call<POST> call, Response<POST> response) {
-                if (response.isSuccessful()) {
-                    showResponse(response.body().toString());
-                    Log.i(TAG, "post submitted to API." + response.body().toString());
+    private void criarUsuario(ClienteModel cliente) {
+        APIService api = ApiUtils.getAPIService();
+        api.criarUsuario(cliente.getNome(), cliente.getCpf(), cliente.getEmail(), cliente.getSenha(), cliente.getTelefone()).enqueue(
+            new Callback<POST>() {
+                @Override
+                public void onResponse(Call<POST> call, Response<POST> response) {
+                    if (response.isSuccessful()) {
+                        showResponse(response.body().toString());
+                        Log.i(TAG, "post submitted to API." + response.body().toString());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<POST> call, Throwable t) {
+                    Log.e(TAG, "Unable to submit post to API.");
                 }
             }
-
-            @Override
-            public void onFailure(Call<POST> call, Throwable t) {
-                Log.e(TAG, "Unable to submit post to API.");
-            }
-        });
+        );
 
     }
 
