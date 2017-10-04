@@ -15,7 +15,6 @@ import renegociacao.moosegroup.com.br.renegociardividas.R;
 public class RecyclerViewHolders extends RecyclerView.ViewHolder {
     public TextView txtTitulo;
     public TextView txtValor;
-    public ImageView imgFotoEmpresa;
     private Context context;
 
 

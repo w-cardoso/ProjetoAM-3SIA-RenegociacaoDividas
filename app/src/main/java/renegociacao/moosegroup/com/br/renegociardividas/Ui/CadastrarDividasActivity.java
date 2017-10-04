@@ -11,5 +11,7 @@ public class CadastrarDividasActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar_dividas);
+
+        getSupportActionBar().hide();
     }
 }

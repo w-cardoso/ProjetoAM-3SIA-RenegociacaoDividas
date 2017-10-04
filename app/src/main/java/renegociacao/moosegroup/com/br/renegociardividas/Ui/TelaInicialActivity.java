@@ -92,12 +92,12 @@ public class TelaInicialActivity extends AppCompatActivity {
     private List<DividaModel> getAllItemList() {
         List<DividaModel> allItems = new ArrayList<DividaModel>();
 
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", "www.itau.com.br", 1222.35, "Itau", R.drawable.itau));
-        allItems.add(new DividaModel("Apartamento", "Divida referente a chaves do apartamento", "www.caixa.com.br", 12332.99, "Caixa Economica", R.drawable.caixa));
-        allItems.add(new DividaModel("Emprestimo Consignado", "Empréstimo realizado em 2012, não foi pago nenhuma parcela", "www.bradesco.com.br", 5600.00, "Bradesco", R.drawable.bradesco));
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", "www.itau.com.br", 1222.35, "Itau", R.drawable.itau));
-        allItems.add(new DividaModel("Apartamento", "Divida referente a chaves do apartamento", "www.caixa.com.br", 12332.99, "Caixa Economica", R.drawable.caixa));
-        allItems.add(new DividaModel("Emprestimo Consignado", "Empréstimo realizado em 2012, não foi pago nenhuma parcela", "www.bradesco.com.br", 5600.00, "Bradesco", R.drawable.bradesco));
+        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "vishhh"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "vishhh"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "vishhh"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "vishhh"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "vishhh"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "vishhh"));
 
         return allItems;
     }

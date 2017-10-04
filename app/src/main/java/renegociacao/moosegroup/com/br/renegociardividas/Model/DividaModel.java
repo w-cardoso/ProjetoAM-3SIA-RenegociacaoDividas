@@ -7,21 +7,17 @@ package renegociacao.moosegroup.com.br.renegociardividas.Model;
 public class DividaModel {
     private String titulo;
     private String descricao;
-    private String url;
     private double valor;
     private String empresa;
 
 
-
-    public DividaModel(String titulo, String descricao, String url, double valor, String empresa, int fotoEmpresa) {
+    public DividaModel(String titulo, String descricao, double valor, String empresa) {
         this.titulo = titulo;
         this.descricao = descricao;
-        this.url = url;
         this.valor = valor;
         this.empresa = empresa;
 
     }
-
 
 
     public String getTitulo() {
@@ -38,14 +34,6 @@ public class DividaModel {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public double getValor() {
