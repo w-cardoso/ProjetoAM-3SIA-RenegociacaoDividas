@@ -1,5 +1,5 @@
 
-package renegociacao.moosegroup.com.br.renegociardividas.Ui;
+package renegociacao.moosegroup.com.br.renegociardividas.Ui.cadastrar_cliente;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +21,7 @@ import renegociacao.moosegroup.com.br.renegociardividas.Data.Remote.ApiUtils;
 import renegociacao.moosegroup.com.br.renegociardividas.Mask;
 import renegociacao.moosegroup.com.br.renegociardividas.Model.ClienteModel;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_acesso.MainActivity;
 import renegociacao.moosegroup.com.br.renegociardividas.Validator;
 import retrofit2.Call;
 import retrofit2.Callback;

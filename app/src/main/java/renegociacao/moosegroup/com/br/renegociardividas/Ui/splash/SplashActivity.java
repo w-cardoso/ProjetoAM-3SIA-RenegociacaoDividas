@@ -1,4 +1,4 @@
-package renegociacao.moosegroup.com.br.renegociardividas.Ui;
+package renegociacao.moosegroup.com.br.renegociardividas.Ui.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import renegociacao.moosegroup.com.br.renegociardividas.R;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_acesso.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

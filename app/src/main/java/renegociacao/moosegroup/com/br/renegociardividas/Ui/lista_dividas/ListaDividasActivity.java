@@ -1,4 +1,4 @@
-package renegociacao.moosegroup.com.br.renegociardividas.Ui;
+package renegociacao.moosegroup.com.br.renegociardividas.Ui.lista_dividas;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -19,8 +19,9 @@ import renegociacao.moosegroup.com.br.renegociardividas.Model.DividaModel;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
 import renegociacao.moosegroup.com.br.renegociardividas.RecycleView.RecyclerItemClickListener;
 import renegociacao.moosegroup.com.br.renegociardividas.RecycleView.RecyclerViewAdapter;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_parceiros.ParceirosActivity;
 
-public class TelaInicialActivity extends AppCompatActivity {
+public class ListaDividasActivity extends AppCompatActivity {
 
     private LinearLayoutManager lLayout;
     private Context context;
@@ -30,18 +31,18 @@ public class TelaInicialActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_inicial);
+        setContentView(R.layout.activity_tela_lista_dividas);
 
         ActionBar ab = getSupportActionBar();
         ab.hide();
 
         List<DividaModel> rowListItem = getAllItemList();
-        lLayout = new LinearLayoutManager(TelaInicialActivity.this);
+        lLayout = new LinearLayoutManager(ListaDividasActivity.this);
 
         RecyclerView rView = (RecyclerView) findViewById(R.id.recycler_view);
         rView.setLayoutManager(lLayout);
 
-        RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(TelaInicialActivity.this, rowListItem);
+        RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(ListaDividasActivity.this, rowListItem);
         rView.setAdapter(rcAdapter);
 
         txtValorTotal = (TextView) findViewById(R.id.telaInicial_txt_total);
@@ -56,13 +57,13 @@ public class TelaInicialActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(TelaInicialActivity.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(ListaDividasActivity.this);
                 builder.setTitle("Descrição");
                 builder.setMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper erat libero, eu rhoncus massa fringilla vel. Nunc elit mi, sodales et malesuada nec, sagittis id ipsum. Curabitur ut lacinia velit. Mauris pharetra sem vitae justo elementum, sed viverra ligula consectetur. Sed aliquet nibh a rhoncus tempor. Nunc euismod mauris non dolor malesuada maximus. Fusce mattis risus et lectus bibendum mollis.");
                 builder.setPositiveButton("Negociar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(TelaInicialActivity.this, ParceirosActivity.class);
+                        Intent intent = new Intent(ListaDividasActivity.this, ParceirosActivity.class);
                         startActivity(intent);
 
                     }

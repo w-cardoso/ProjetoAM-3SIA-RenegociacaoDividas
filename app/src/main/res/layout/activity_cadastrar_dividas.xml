@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_color5"
-    tools:context="renegociacao.moosegroup.com.br.renegociardividas.Ui.CadastrarDividasActivity">
+    tools:context="renegociacao.moosegroup.com.br.renegociardividas.Ui.cadastrar_dividas.CadastrarDividasActivity">
 
 
     <LinearLayout

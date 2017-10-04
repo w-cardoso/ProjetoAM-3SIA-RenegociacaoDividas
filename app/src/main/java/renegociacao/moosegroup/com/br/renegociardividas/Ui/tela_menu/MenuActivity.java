@@ -1,4 +1,4 @@
-package renegociacao.moosegroup.com.br.renegociardividas.Ui;
+package renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_menu;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +11,9 @@ import com.hitomi.cmlibrary.OnMenuSelectedListener;
 import com.hitomi.cmlibrary.OnMenuStatusChangeListener;
 
 import renegociacao.moosegroup.com.br.renegociardividas.R;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_parceiros.ParceirosActivity;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.lista_dividas.ListaDividasActivity;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.cadastrar_dividas.CadastrarDividasActivity;
 
 public class MenuActivity extends AppCompatActivity {
     String arrayTelas[] = {"Lista de Dividas",
@@ -49,7 +52,7 @@ public class MenuActivity extends AppCompatActivity {
                     public void onMenuClosed() {
                         switch (selectedIdex) {
                             case 0:
-                                Intent listaDividas = new Intent(MenuActivity.this, TelaInicialActivity.class);
+                                Intent listaDividas = new Intent(MenuActivity.this, ListaDividasActivity.class);
                                 startActivity(listaDividas);
                                 selectedIdex = 14;
                                 break;
