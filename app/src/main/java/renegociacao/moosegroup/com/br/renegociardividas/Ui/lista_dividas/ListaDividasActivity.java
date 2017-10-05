@@ -17,8 +17,6 @@ import java.util.List;
 
 import renegociacao.moosegroup.com.br.renegociardividas.Model.DividaModel;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
-import renegociacao.moosegroup.com.br.renegociardividas.RecycleView.RecyclerItemClickListener;
-import renegociacao.moosegroup.com.br.renegociardividas.RecycleView.RecyclerViewAdapter;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_parceiros.ParceirosActivity;
 
 public class ListaDividasActivity extends AppCompatActivity {
@@ -93,12 +91,12 @@ public class ListaDividasActivity extends AppCompatActivity {
     private List<DividaModel> getAllItemList() {
         List<DividaModel> allItems = new ArrayList<DividaModel>();
 
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "vishhh"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "vishhh"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "vishhh"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "vishhh"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "vishhh"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "vishhh"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 329.71, "Bradesco"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 252.32, "CarSystem"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 122.98, "Itau"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 134.41, "Crefisa"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "Zé do Pão"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 500.09, "Bote do Juarez"));
 
         return allItems;
     }

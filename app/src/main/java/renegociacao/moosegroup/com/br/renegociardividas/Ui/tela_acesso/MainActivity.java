@@ -17,18 +17,16 @@ import android.widget.TextView;
 import renegociacao.moosegroup.com.br.renegociardividas.Mask;
 import renegociacao.moosegroup.com.br.renegociardividas.Model.ClienteModel;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
-import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_menu.MenuActivity;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.cadastrar_cliente.TelaCadastroActivity;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_menu.MenuActivity;
 import renegociacao.moosegroup.com.br.renegociardividas.Validator;
 
 
 public class MainActivity extends AppCompatActivity {
 
-    SQLiteOpenHelper dbHelper;
-    SQLiteDatabase db;
-    Cursor cursor;
+
     private EditText edtCpf;
-    private  TextInputLayout tilCpf;
+    private TextInputLayout tilCpf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +62,12 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
-                
                 cliente.setCpf(edtCpf.getText().toString());
                 cliente.setSenha(edtSenha.getText().toString());
 
 
-                    Intent telaEntrar = new Intent(MainActivity.this, MenuActivity.class);
-                    startActivity(telaEntrar);
-
+                Intent telaEntrar = new Intent(MainActivity.this, MenuActivity.class);
+                startActivity(telaEntrar);
 
 
             }

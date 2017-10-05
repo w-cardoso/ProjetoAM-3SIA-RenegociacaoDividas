@@ -1,4 +1,4 @@
-package renegociacao.moosegroup.com.br.renegociardividas.RecycleView;
+package renegociacao.moosegroup.com.br.renegociardividas.Ui.lista_dividas;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -34,10 +34,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @Override
     public void onBindViewHolder(RecyclerViewHolders holder, int position) {
         holder.txtTitulo.setText(itemList.get(position).getTitulo());
-
         holder.txtValor.setText("R$ " + Double.toString(itemList.get(position).getValor()));
-
-
+        holder.txtUrl.setText(itemList.get(position).getEmpresa());
     }
 
     @Override

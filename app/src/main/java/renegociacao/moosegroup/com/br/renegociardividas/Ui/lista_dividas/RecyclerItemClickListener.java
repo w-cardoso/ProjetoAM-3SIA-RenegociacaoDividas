@@ -1,4 +1,4 @@
-package renegociacao.moosegroup.com.br.renegociardividas.RecycleView;
+package renegociacao.moosegroup.com.br.renegociardividas.Ui.lista_dividas;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
@@ -12,7 +12,6 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
 
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
-
         public void onLongItemClick(View view, int position);
     }
 

@@ -1,4 +1,4 @@
-package renegociacao.moosegroup.com.br.renegociardividas.RecycleView;
+package renegociacao.moosegroup.com.br.renegociardividas.Ui.lista_dividas;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +15,7 @@ import renegociacao.moosegroup.com.br.renegociardividas.R;
 public class RecyclerViewHolders extends RecyclerView.ViewHolder {
     public TextView txtTitulo;
     public TextView txtValor;
+    public TextView txtUrl;
     private Context context;
 
 
@@ -23,6 +24,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder {
         this.context = itemView.getContext();
         txtTitulo = (TextView) itemView.findViewById(R.id.cardView_txtTitulo);
         txtValor = (TextView) itemView.findViewById(R.id.cardView_txtValor);
+        txtUrl = (TextView) itemView.findViewById(R.id.cardView_txtUrl);
 
     }
 }

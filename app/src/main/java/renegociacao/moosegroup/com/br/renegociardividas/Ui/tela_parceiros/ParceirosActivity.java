@@ -14,7 +14,7 @@ import java.util.List;
 
 import renegociacao.moosegroup.com.br.renegociardividas.Model.ListaParceiros;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
-import renegociacao.moosegroup.com.br.renegociardividas.RecycleView.RecyclerItemClickListener;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.lista_dividas.RecyclerItemClickListener;
 
 public class ParceirosActivity extends AppCompatActivity {
     private List<ListaParceiros> listaParceiros = new ArrayList<>();
