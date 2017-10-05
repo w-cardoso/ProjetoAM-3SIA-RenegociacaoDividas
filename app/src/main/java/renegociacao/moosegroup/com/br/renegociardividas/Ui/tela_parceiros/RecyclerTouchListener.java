@@ -1,14 +1,17 @@
-package renegociacao.moosegroup.com.br.renegociardividas.RecycleView;
+package renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_parceiros;
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import renegociacao.moosegroup.com.br.renegociardividas.RecycleView.RecyclerItemClickListener;
 
-public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListener {
 
-    private OnItemClickListener mListener;
+public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {
+
+    private RecyclerItemClickListener.OnItemClickListener mListener;
 
     public interface OnItemClickListener {
         public void onItemClick(View view, int position);
@@ -18,7 +21,7 @@ public class RecyclerItemClickListener implements RecyclerView.OnItemTouchListen
 
     GestureDetector mGestureDetector;
 
-    public RecyclerItemClickListener(Context context, final RecyclerView recyclerView, OnItemClickListener listener) {
+    public RecyclerTouchListener(Context context, final RecyclerView recyclerView, RecyclerItemClickListener.OnItemClickListener listener) {
         mListener = listener;
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             @Override
