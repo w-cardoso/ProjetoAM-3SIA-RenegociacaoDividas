@@ -9,6 +9,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import java.util.List;
 
 import renegociacao.moosegroup.com.br.renegociardividas.Model.DividaModel;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_menu.MenuActivity;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_parceiros.ParceirosActivity;
 
 public class ListaDividasActivity extends AppCompatActivity {
@@ -31,8 +33,8 @@ public class ListaDividasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_lista_dividas);
 
-        ActionBar ab = getSupportActionBar();
-        ab.hide();
+        getSupportActionBar().setElevation(0);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         List<DividaModel> rowListItem = getAllItemList();
         lLayout = new LinearLayoutManager(ListaDividasActivity.this);
@@ -99,6 +101,18 @@ public class ListaDividasActivity extends AppCompatActivity {
         allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 500.09, "Bote do Juarez"));
 
         return allItems;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == android.R.id.home) {
+            Intent voltar = new Intent(this, MenuActivity.class);
+            startActivity(voltar);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }
