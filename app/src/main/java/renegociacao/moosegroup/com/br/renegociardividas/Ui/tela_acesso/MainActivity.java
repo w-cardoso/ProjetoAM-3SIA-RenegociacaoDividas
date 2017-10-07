@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import renegociacao.moosegroup.com.br.renegociardividas.Data.Remote.APIUserClient;
+import renegociacao.moosegroup.com.br.renegociardividas.Data.Remote.ApiUtils;
 import renegociacao.moosegroup.com.br.renegociardividas.Mask;
 import renegociacao.moosegroup.com.br.renegociardividas.Model.ClienteModel;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
@@ -27,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText edtCpf;
     private TextInputLayout tilCpf;
+    private APIUserClient mUserClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         ActionBar ab = getSupportActionBar();
         ab.hide();
+
+        mUserClient = ApiUtils.getAPIUserClient();
 
         edtCpf = (EditText) findViewById(R.id.main_edt_cpf);
         edtCpf.addTextChangedListener(Mask.insert(Mask.CPF_MASK, edtCpf));

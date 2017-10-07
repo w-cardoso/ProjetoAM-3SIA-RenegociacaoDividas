@@ -34,7 +34,7 @@ public class TelaCadastroActivity extends AppCompatActivity {
     private ClienteModel cliente;
     private APIService mAPIService;
     private String nome, cpf, senha, telefone, email;
-    private static final String TAG = "MainActivity";
+    private static final String TAG = TelaCadastroActivity.class.getSimpleName() ;
     private Button btnCadastrar, btnCancelar;
 
 

@@ -8,13 +8,18 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Login {
-    @SerializedName("Cpf")
+    @SerializedName("cpf")
     @Expose
     private String Cpf;
 
-    @SerializedName("Senha")
+    @SerializedName("senha")
     @Expose
     private String Senha;
+
+    public Login(String cpf, String senha) {
+        this.Cpf = cpf;
+        this.Senha = senha;
+    }
 
     public String getCpf() {
         return Cpf;
