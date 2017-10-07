@@ -76,6 +76,7 @@ public class TelaCadastroActivity extends AppCompatActivity {
                     String telefone = edtTelefone.getText().toString().trim();
 
                     sendPost(nome, cpf, email, senha, telefone);
+                    DialogPositivo();
 
 
                 } else {
@@ -120,11 +121,11 @@ public class TelaCadastroActivity extends AppCompatActivity {
     }
 
     private void sendPost(String nome, String cpf, String email, String senha, String telefone) {
-        mAPIService.savePost(1, nome, cpf, email, senha, telefone).enqueue(new Callback<POST>() {
+        mAPIService.savePost(nome, cpf, email, senha, telefone).enqueue(new Callback<POST>() {
             @Override
             public void onResponse(Call<POST> call, Response<POST> response) {
                 if (response.isSuccessful()) {
-                    showResponse(response.body().toString());
+
                     Log.i(TAG, "post submitted to API." + response.body().toString());
                 }
             }
@@ -138,12 +139,7 @@ public class TelaCadastroActivity extends AppCompatActivity {
     }
 
 
-    public void showResponse(String response) {
-        if (mResponseTv.getVisibility() == View.GONE) {
-            mResponseTv.setVisibility(View.VISIBLE);
-        }
-        mResponseTv.setText(response);
-    }
+
 
     private void DialogPositivo() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(TelaCadastroActivity.this);

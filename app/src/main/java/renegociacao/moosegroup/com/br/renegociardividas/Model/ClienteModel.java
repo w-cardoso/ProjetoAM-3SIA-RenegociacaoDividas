@@ -9,9 +9,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class ClienteModel {
 
-    @SerializedName("id")
-    @Expose
-    private Integer id;
 
     @SerializedName("nome")
     @Expose
@@ -74,18 +71,10 @@ public class ClienteModel {
         this.telefone = telefone;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     @Override
     public String toString() {
         return "ClienteModel{" +
-                "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", email='" + email + '\'' +
