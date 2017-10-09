@@ -15,8 +15,6 @@ import retrofit2.http.POST;
 
 public interface APIUserClient {
 
-
-
     @POST("/API/Tokens")
     Call<User> login(@Body Login login);
 

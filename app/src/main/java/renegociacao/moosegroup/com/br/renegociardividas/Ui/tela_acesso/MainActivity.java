@@ -2,9 +2,6 @@ package renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_acesso;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
@@ -24,8 +21,7 @@ import renegociacao.moosegroup.com.br.renegociardividas.Model.Login;
 import renegociacao.moosegroup.com.br.renegociardividas.Model.User;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.cadastrar_cliente.TelaCadastroActivity;
-import renegociacao.moosegroup.com.br.renegociardividas.Ui.menu_navigation.NavigationActivity;
-import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_menu.MenuActivity;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.dividas.DividasActivity;
 import renegociacao.moosegroup.com.br.renegociardividas.Validator;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -88,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
                                 SharedPreferences.Editor e = sp.edit();
                                 e.putString("token", response.body().getToken());
                                 e.commit();
-                                Intent telaEntrar = new Intent(MainActivity.this, NavigationActivity.class);
+                                Intent telaEntrar = new Intent(MainActivity.this, DividasActivity.class);
                                 startActivity(telaEntrar);
                             } else {
                                 Toast.makeText(MainActivity.this, "Usuarios não conferem", Toast.LENGTH_SHORT).show();

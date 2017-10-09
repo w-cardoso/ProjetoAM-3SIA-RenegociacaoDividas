@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_color4"
+    android:background="@drawable/background_color5"
     android:orientation="vertical"
     tools:context="renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_acesso.MainActivity">
 
@@ -48,7 +48,7 @@
             android:layout_marginTop="40dp"
             android:background="@drawable/background_button"
             android:text="@string/main_edt_entrar"
-            android:textColor="#585858" />
+            android:textColor="@color/colorWhite" />
 
         <TextView
             android:id="@+id/main_txt_cadastrar"

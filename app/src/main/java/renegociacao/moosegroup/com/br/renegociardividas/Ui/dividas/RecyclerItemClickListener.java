@@ -1,4 +1,4 @@
-package renegociacao.moosegroup.com.br.renegociardividas.Ui.lista_dividas;
+package renegociacao.moosegroup.com.br.renegociardividas.Ui.dividas;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;

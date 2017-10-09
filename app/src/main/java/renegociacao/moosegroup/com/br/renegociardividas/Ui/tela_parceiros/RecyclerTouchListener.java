@@ -6,7 +6,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
-import renegociacao.moosegroup.com.br.renegociardividas.Ui.lista_dividas.RecyclerItemClickListener;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.dividas.RecyclerItemClickListener;
+
 
 
 public class RecyclerTouchListener implements RecyclerView.OnItemTouchListener {

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_color4"
+    android:background="@drawable/background_color5"
     tools:context="renegociacao.moosegroup.com.br.renegociardividas.Ui.splash.SplashActivity">
 
     <ImageView

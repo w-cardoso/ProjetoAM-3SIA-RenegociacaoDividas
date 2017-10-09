@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import renegociacao.moosegroup.com.br.renegociardividas.Model.DividaModel;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
-import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_menu.MenuActivity;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.dividas.DividasActivity;
+
 
 public class CadastrarDividasActivity extends AppCompatActivity {
 
@@ -26,7 +28,7 @@ public class CadastrarDividasActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            Intent voltar = new Intent(this, MenuActivity.class);
+            Intent voltar = new Intent(this, DividasActivity.class);
             startActivity(voltar);
         }
 

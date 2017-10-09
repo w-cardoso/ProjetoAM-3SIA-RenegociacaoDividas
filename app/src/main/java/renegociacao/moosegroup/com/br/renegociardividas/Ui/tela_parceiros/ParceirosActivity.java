@@ -16,9 +16,8 @@ import java.util.List;
 
 import renegociacao.moosegroup.com.br.renegociardividas.Model.ListaParceiros;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
-import renegociacao.moosegroup.com.br.renegociardividas.Ui.lista_dividas.RecyclerItemClickListener;
-import renegociacao.moosegroup.com.br.renegociardividas.Ui.menu_navigation.NavigationActivity;
-import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_menu.MenuActivity;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.dividas.DividasActivity;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.dividas.RecyclerItemClickListener;
 
 public class ParceirosActivity extends AppCompatActivity {
     private List<ListaParceiros> listaParceiros = new ArrayList<>();
@@ -48,13 +47,14 @@ public class ParceirosActivity extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 ListaParceiros parceiro = listaParceiros.get(position);
                 Toast.makeText(getApplicationContext(), parceiro.getNomeFanstasia() + " is selected!", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
             public void onLongItemClick(View view, int position) {
 
             }
+
+
 
 
         }));
@@ -102,7 +102,7 @@ public class ParceirosActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            Intent voltar = new Intent(this, NavigationActivity.class);
+            Intent voltar = new Intent(this, DividasActivity.class);
             startActivity(voltar);
         }
 

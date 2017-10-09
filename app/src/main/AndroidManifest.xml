@@ -25,7 +25,7 @@
         <activity android:name=".Ui.cadastrar_dividas.CadastrarDividasActivity" />
         <activity android:name=".Ui.tela_parceiros.ParceirosActivity" />
         <activity
-            android:name=".Ui.menu_navigation.NavigationActivity"
+            android:name=".Ui.dividas.DividasActivity"
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
