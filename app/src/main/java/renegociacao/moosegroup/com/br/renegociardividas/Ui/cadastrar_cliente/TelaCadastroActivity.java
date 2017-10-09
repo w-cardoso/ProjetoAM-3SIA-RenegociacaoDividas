@@ -20,6 +20,7 @@ import renegociacao.moosegroup.com.br.renegociardividas.Data.Remote.ApiUtils;
 import renegociacao.moosegroup.com.br.renegociardividas.Mask;
 import renegociacao.moosegroup.com.br.renegociardividas.Model.ClienteModel;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.menu_navigation.NavigationActivity;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_acesso.MainActivity;
 import renegociacao.moosegroup.com.br.renegociardividas.Validator;
 import retrofit2.Call;
@@ -264,7 +265,7 @@ public class TelaCadastroActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            Intent voltar = new Intent(this, MainActivity.class);
+            Intent voltar = new Intent(this, NavigationActivity.class);
             startActivity(voltar);
         }
 

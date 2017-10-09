@@ -23,7 +23,11 @@
         <activity android:name=".Ui.lista_dividas.ListaDividasActivity" />
         <activity android:name=".Ui.tela_menu.MenuActivity" />
         <activity android:name=".Ui.cadastrar_dividas.CadastrarDividasActivity" />
-        <activity android:name=".Ui.tela_parceiros.ParceirosActivity"></activity>
+        <activity android:name=".Ui.tela_parceiros.ParceirosActivity" />
+        <activity
+            android:name=".Ui.menu_navigation.NavigationActivity"
+            android:label="@string/title_activity_navigation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

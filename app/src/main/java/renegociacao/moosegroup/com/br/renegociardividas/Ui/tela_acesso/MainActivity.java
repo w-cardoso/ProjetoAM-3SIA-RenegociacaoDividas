@@ -24,6 +24,7 @@ import renegociacao.moosegroup.com.br.renegociardividas.Model.Login;
 import renegociacao.moosegroup.com.br.renegociardividas.Model.User;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.cadastrar_cliente.TelaCadastroActivity;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.menu_navigation.NavigationActivity;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_menu.MenuActivity;
 import renegociacao.moosegroup.com.br.renegociardividas.Validator;
 import retrofit2.Call;
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                                 SharedPreferences.Editor e = sp.edit();
                                 e.putString("token", response.body().getToken());
                                 e.commit();
-                                Intent telaEntrar = new Intent(MainActivity.this, MenuActivity.class);
+                                Intent telaEntrar = new Intent(MainActivity.this, NavigationActivity.class);
                                 startActivity(telaEntrar);
                             } else {
                                 Toast.makeText(MainActivity.this, "Usuarios não conferem", Toast.LENGTH_SHORT).show();
