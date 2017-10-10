@@ -17,6 +17,7 @@ public class DividaModel {
         this.valor = valor;
         this.empresa = empresa;
 
+
     }
 
 

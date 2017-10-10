@@ -17,6 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.math.RoundingMode;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +51,7 @@ public class DividasActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        List<DividaModel> rowListItem = getAllItemList();
+        final List<DividaModel> rowListItem = getAllItemList();
         lLayout = new LinearLayoutManager(DividasActivity.this);
 
         RecyclerView rView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -60,11 +62,14 @@ public class DividasActivity extends AppCompatActivity
 
         txtValorTotal = (TextView) findViewById(R.id.telaInicial_txt_total);
 
+
+
         for (int i = 0; i < rowListItem.size(); i++) {
             total += rowListItem.get(i).getValor();
         }
 
-        txtValorTotal.setText("R$ " + Double.toString(total));
+        String resultado = String.format("%.2f", total);
+        txtValorTotal.setText("R$ "+resultado);
 
         rView.addOnItemTouchListener(new RecyclerItemClickListener(context, rView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -72,7 +77,7 @@ public class DividasActivity extends AppCompatActivity
 
                 final AlertDialog.Builder builder = new AlertDialog.Builder(DividasActivity.this);
                 builder.setTitle("Descrição");
-                builder.setMessage("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper erat libero, eu rhoncus massa fringilla vel. Nunc elit mi, sodales et malesuada nec, sagittis id ipsum. Curabitur ut lacinia velit. Mauris pharetra sem vitae justo elementum, sed viverra ligula consectetur. Sed aliquet nibh a rhoncus tempor. Nunc euismod mauris non dolor malesuada maximus. Fusce mattis risus et lectus bibendum mollis.");
+                builder.setMessage(rowListItem.get(position).getDescricao());
                 builder.setPositiveButton("Negociar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -143,11 +148,11 @@ public class DividasActivity extends AppCompatActivity
     private List<DividaModel> getAllItemList() {
         List<DividaModel> allItems = new ArrayList<DividaModel>();
         allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 329.71, "www.bradesco.com.br"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 252.32, "www.caixa.com.br"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 122.98, "www.itau.com.br"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 134.41, "www.crefisa.com.br"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 1222.44, "www.santander.com.br"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 500.09, "www.net.com.br"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Chaves do apartamento atrasado a 3 meses", 22252.32, "www.caixa.com.br"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Emprestimo consignado", 122.98, "www.itau.com.br"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Ewmprestimo realizado em 2015", 1234.41, "www.crefisa.com.br"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Cartão de crédito referente ao mes 10/2015", 1222.44, "www.santander.com.br"));
+        allItems.add(new DividaModel("Cartão de Crédito", "Fatura da Net nãop paga em 2016", 500.09, "www.net.com.br"));
 
         return allItems;
     }
