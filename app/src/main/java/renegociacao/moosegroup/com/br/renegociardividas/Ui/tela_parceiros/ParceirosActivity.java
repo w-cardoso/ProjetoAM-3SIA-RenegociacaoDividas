@@ -1,15 +1,19 @@
 package renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_parceiros;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +49,35 @@ public class ParceirosActivity extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(context, recyclerView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ListaParceiros parceiro = listaParceiros.get(position);
-                Toast.makeText(getApplicationContext(), parceiro.getNomeFanstasia() + " is selected!", Toast.LENGTH_SHORT).show();
+                final ListaParceiros parceiro = listaParceiros.get(position);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(ParceirosActivity.this);
+                builder.setTitle("Informação");
+                builder.setMessage("Renegocie suas dividas conosco, condições especiais para você");
+                builder.setPositiveButton("Ligar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        acessarTelefone(parceiro);
+                    }
+                });
+                builder.setNegativeButton("WhatsApp", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        openWhatsApp(parceiro.getTelefone());
+                    }
+                });
+
+                builder.setNeutralButton("Voltar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent voltar = new Intent(ParceirosActivity.this, DividasActivity.class);
+                        startActivity(voltar);
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
+
 
             @Override
             public void onLongItemClick(View view, int position) {
@@ -55,27 +85,44 @@ public class ParceirosActivity extends AppCompatActivity {
             }
 
 
-
-
         }));
 
         preparandoListaParceiros();
     }
 
+    private void acessarTelefone(ListaParceiros parceiro) {
+        if (ActivityCompat.checkSelfPermission(ParceirosActivity.this,
+                android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(ParceirosActivity.this, new String[]
+                    {android.Manifest.permission.CALL_PHONE}, 123);
+        } else {
+            Intent callIntent = new Intent(Intent.ACTION_CALL);
+            callIntent.setData(Uri.parse("tel:" + parceiro.getTelefone()));
+            startActivity(callIntent);
+        }
+    }
+
+    private void openWhatsApp(String telefone) {
+        Uri uri = Uri.parse("smsto:" + telefone);
+        Intent whats = new Intent(Intent.ACTION_SENDTO, uri);
+        whats.setPackage("com.whatsapp");
+        startActivity(Intent.createChooser(whats, null));
+    }
+
     private void preparandoListaParceiros() {
-        ListaParceiros parceiros = new ListaParceiros("Bradesco", "86.232.801/0001-06", "(11)2595-3231");
+        ListaParceiros parceiros = new ListaParceiros("Bradesco", "86.232.801/0001-06", "(11) 94536-4455");
         listaParceiros.add(parceiros);
 
-        parceiros = new ListaParceiros("Santander", "82.374.407/0001-43", "(11)3729-8387");
+        parceiros = new ListaParceiros("Santander", "82.374.407/0001-43", "(11) 3729-8387");
         listaParceiros.add(parceiros);
 
-        parceiros = new ListaParceiros("Caixa", "83.328.362/0001-33", "(11)2685-8358");
+        parceiros = new ListaParceiros("Caixa", "83.328.362/0001-33", "(11) 2685-8358");
         listaParceiros.add(parceiros);
 
-        parceiros = new ListaParceiros("Crefisa", "71.454.197/0001-87", "(85)3629-6156");
+        parceiros = new ListaParceiros("Crefisa", "71.454.197/0001-87", "(11) 3629-6156");
         listaParceiros.add(parceiros);
 
-        parceiros = new ListaParceiros("BMB", "35.129.746/0001-84", "(79)2691-5217");
+        parceiros = new ListaParceiros("BMB", "35.129.746/0001-84", "(11) 2691-5217");
         listaParceiros.add(parceiros);
 
 
