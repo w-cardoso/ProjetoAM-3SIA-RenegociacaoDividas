@@ -35,7 +35,7 @@ public class TelaCadastroActivity extends AppCompatActivity {
     private ClienteModel cliente;
     private APIService mAPIService;
     private String nome, cpf, senha, telefone, email;
-    private static final String TAG = TelaCadastroActivity.class.getSimpleName() ;
+    private static final String TAG = TelaCadastroActivity.class.getSimpleName();
     private Button btnCadastrar, btnCancelar;
 
 
@@ -206,11 +206,12 @@ public class TelaCadastroActivity extends AppCompatActivity {
             tilNome.setError(getString(R.string.err_msg_nome));
             requestFocus(edtNome);
             return false;
-        } else {
-            tilNome.setErrorEnabled(false);
-        }
 
-        return true;
+        } else {
+
+            tilNome.setErrorEnabled(false);
+            return true;
+        }
     }
 
     private boolean validateEmail() {

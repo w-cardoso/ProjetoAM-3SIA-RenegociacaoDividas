@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<User> call, Response<User> response) {
                             if (response.isSuccessful()) {
-                                Toast.makeText(MainActivity.this, response.body().getToken(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "Seja bem-vindo ao App Divida Zero", Toast.LENGTH_SHORT).show();
 
                                 token = response.body().getToken();
                                 id = response.body().getId();

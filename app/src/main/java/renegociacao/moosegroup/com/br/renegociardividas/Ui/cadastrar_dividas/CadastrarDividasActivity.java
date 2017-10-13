@@ -6,23 +6,26 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
 import renegociacao.moosegroup.com.br.renegociardividas.Dao.DbHelper;
 import renegociacao.moosegroup.com.br.renegociardividas.Dao.DividaDao;
+import renegociacao.moosegroup.com.br.renegociardividas.MascaraMonetaria;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
-import renegociacao.moosegroup.com.br.renegociardividas.Ui.MascaraMonetaria;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.dividas.DividasActivity;
 
 
 public class CadastrarDividasActivity extends AppCompatActivity {
     SQLiteOpenHelper openHelper;
     SQLiteDatabase db;
-    private EditText txtTitulo, txtDescricao, txtValor, txtEmpresa;
+    private EditText edtTitulo, edtDescricao, edtValor, edtEmpresa;
+    private TextInputLayout tilTitulo, tilDescricao, tilValor, tilEmpresa;
     private Button btnCadastrar, btnCancelar;
     private int user_id;
 
@@ -37,35 +40,39 @@ public class CadastrarDividasActivity extends AppCompatActivity {
 
         openHelper = new DbHelper(this);
         loadComponents();
-        txtValor.addTextChangedListener(new MascaraMonetaria(txtValor));
+        edtValor.addTextChangedListener(new MascaraMonetaria(edtValor));
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String str = txtValor.getText().toString();
 
-                db = openHelper.getWritableDatabase();
+                submitForm();
+
+                if (isaBoolean()) {
+                    String str = edtValor.getText().toString();
+                    db = openHelper.getWritableDatabase();
 
 
-                SharedPreferences sp = getSharedPreferences("sp", MODE_PRIVATE);
-                user_id = sp.getInt("user_id", 0);
-                String titulo = txtTitulo.getText().toString();
-                String descricao = txtDescricao.getText().toString();
-                double valor = stringMonetarioToDouble(str);
-                String empresa = txtEmpresa.getText().toString();
+                    SharedPreferences sp = getSharedPreferences("sp", MODE_PRIVATE);
+                    user_id = sp.getInt("user_id", 0);
+                    String titulo = edtTitulo.getText().toString();
+                    String descricao = edtDescricao.getText().toString();
+                    double valor = stringMonetarioToDouble(str);
+                    String empresa = edtEmpresa.getText().toString();
 
-                DividaDao dao = new DividaDao(getBaseContext());
-                boolean sucesso = dao.salvar(user_id, titulo, descricao, valor, empresa);
-                if (sucesso) {
-                    txtTitulo.setText("");
-                    txtDescricao.setText("");
-                    txtValor.setText("");
-                    txtEmpresa.setText("");
-                    Snackbar.make(view, "Divida salva com  Sucesso!", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
-                } else {
-                    Snackbar.make(view, "Erro ao salvar, consulte os logs!", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+                    DividaDao dao = new DividaDao(getBaseContext());
+                    boolean sucesso = dao.salvar(user_id, titulo, descricao, valor, empresa);
+                    if (sucesso) {
+                        edtTitulo.setText("");
+                        edtDescricao.setText("");
+                        edtValor.setText("");
+                        edtEmpresa.setText("");
+                        Snackbar.make(view, "Divida salva com  Sucesso!", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    } else {
+                        Snackbar.make(view, "Erro ao salvar, consulte os logs!", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    }
                 }
 
 
@@ -82,12 +89,22 @@ public class CadastrarDividasActivity extends AppCompatActivity {
 
     }
 
+    private boolean isaBoolean() {
+        return validateTitulo() && validateDescricao() && validateValor() && validateEmpresa();
+    }
+
 
     private void loadComponents() {
-        txtTitulo = (EditText) findViewById(R.id.cadastrarDividas_edt_titulo);
-        txtDescricao = (EditText) findViewById(R.id.cadastrarDividas_edt_descricao);
-        txtValor = (EditText) findViewById(R.id.cadastrarDividas_edt_valor);
-        txtEmpresa = (EditText) findViewById(R.id.cadastrarDividas_edt_empresa);
+        edtTitulo = (EditText) findViewById(R.id.cadastrarDividas_edt_titulo);
+        edtDescricao = (EditText) findViewById(R.id.cadastrarDividas_edt_descricao);
+        edtValor = (EditText) findViewById(R.id.cadastrarDividas_edt_valor);
+        edtEmpresa = (EditText) findViewById(R.id.cadastrarDividas_edt_empresa);
+
+        tilTitulo = (TextInputLayout) findViewById(R.id.cadastrarDividas_til_titulo);
+        tilDescricao = (TextInputLayout) findViewById(R.id.cadastrarDividas_til_descricao);
+        tilValor = (TextInputLayout) findViewById(R.id.cadastrarDividas_til_valor);
+        tilEmpresa = (TextInputLayout) findViewById(R.id.cadastrarDividas_til_empresa);
+
         btnCadastrar = (Button) findViewById(R.id.cadastrarDividas_btn_cadastrar);
         btnCancelar = (Button) findViewById(R.id.cadastrarDividas_btn_cancelar);
 
@@ -105,6 +122,81 @@ public class CadastrarDividasActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void submitForm() {
+        if (!validateTitulo()) {
+            return;
+        }
+
+        if (!validateDescricao()) {
+            return;
+        }
+
+        if (!validateValor()) {
+            return;
+        }
+
+        if (!validateEmpresa()) {
+            return;
+        }
+
+
+    }
+
+    private boolean validateTitulo() {
+        if (edtTitulo.getText().toString().isEmpty()) {
+            tilTitulo.setError("O campo está vazio ");
+            requestFocus(edtTitulo);
+            return false;
+
+        } else {
+            tilTitulo.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validateDescricao() {
+        if (edtDescricao.getText().toString().isEmpty()) {
+            tilDescricao.setError("O campo está vazio ");
+            requestFocus(edtDescricao);
+            return false;
+
+        } else {
+            tilDescricao.setErrorEnabled(false);
+            return true;
+        }
+    }
+
+    private boolean validateValor() {
+        if (edtValor.getText().toString().isEmpty()) {
+            tilValor.setError("O campo está vazio ");
+            requestFocus(edtValor);
+            return false;
+
+        } else {
+            tilValor.setErrorEnabled(false);
+            return true;
+        }
+
+    }
+
+    private boolean validateEmpresa() {
+        if (edtEmpresa.getText().toString().isEmpty()) {
+            tilEmpresa.setError("O campo está vazio ");
+            requestFocus(edtEmpresa);
+            return false;
+
+        } else {
+            tilEmpresa.setErrorEnabled(false);
+            return true;
+        }
+
+    }
+
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
 
     private Double stringMonetarioToDouble(String str) {
         double retorno = 0;

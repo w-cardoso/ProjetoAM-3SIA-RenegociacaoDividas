@@ -1,4 +1,4 @@
-package renegociacao.moosegroup.com.br.renegociardividas.Ui;
+package renegociacao.moosegroup.com.br.renegociardividas;
 
 import android.text.Editable;
 import android.text.TextWatcher;
