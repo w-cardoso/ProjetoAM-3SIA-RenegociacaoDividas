@@ -16,13 +16,15 @@ import renegociacao.moosegroup.com.br.renegociardividas.Model.DividaModel;
 public class DividaDao {
     public static final String TABELA_NOME = "dividas";
     private DbGateway gw;
+    private int usuario;
+
 
     public DividaDao(Context ctx) {
         gw = DbGateway.getInstance(ctx);
     }
 
 
-    public boolean salvar(int user_id, String titulo, String descricao, String valor, String empresa) {
+    public boolean salvar(int user_id, String titulo, String descricao, double valor, String empresa) {
         ContentValues cv = new ContentValues();
         cv.put("user_id", user_id);
         cv.put("titulo", titulo);
@@ -34,13 +36,15 @@ public class DividaDao {
 
     public List<DividaModel> retornarTodos() {
         List<DividaModel> dividas = new ArrayList<>();
+
+
         Cursor cursor = gw.getDatabase().rawQuery("SELECT * FROM dividas", null);
         while (cursor.moveToNext()) {
             Long id = cursor.getLong(cursor.getColumnIndex("id"));
             int user_id = cursor.getInt(cursor.getColumnIndex("user_id"));
             String titulo = cursor.getString(cursor.getColumnIndex("titulo"));
             String descricao = cursor.getString(cursor.getColumnIndex("descricao"));
-            int valor = cursor.getInt(cursor.getColumnIndex("valor"));
+            double valor = cursor.getDouble(cursor.getColumnIndex("valor"));
             String empresa = cursor.getString(cursor.getColumnIndex("empresa"));
             dividas.add(new DividaModel(id, user_id, titulo, descricao, valor, empresa));
 

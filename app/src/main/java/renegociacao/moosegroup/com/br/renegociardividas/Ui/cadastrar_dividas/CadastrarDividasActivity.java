@@ -10,18 +10,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 
 import renegociacao.moosegroup.com.br.renegociardividas.Dao.DbHelper;
 import renegociacao.moosegroup.com.br.renegociardividas.Dao.DividaDao;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.MascaraMonetaria;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.dividas.DividasActivity;
 
 
 public class CadastrarDividasActivity extends AppCompatActivity {
     SQLiteOpenHelper openHelper;
     SQLiteDatabase db;
-    private TextView txtTitulo, txtDescricao, txtValor, txtEmpresa;
+    private EditText txtTitulo, txtDescricao, txtValor, txtEmpresa;
     private Button btnCadastrar, btnCancelar;
     private int user_id;
 
@@ -36,10 +37,12 @@ public class CadastrarDividasActivity extends AppCompatActivity {
 
         openHelper = new DbHelper(this);
         loadComponents();
+        txtValor.addTextChangedListener(new MascaraMonetaria(txtValor));
 
         btnCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String str = txtValor.getText().toString();
 
                 db = openHelper.getWritableDatabase();
 
@@ -48,7 +51,7 @@ public class CadastrarDividasActivity extends AppCompatActivity {
                 user_id = sp.getInt("user_id", 0);
                 String titulo = txtTitulo.getText().toString();
                 String descricao = txtDescricao.getText().toString();
-                String valor = txtValor.getText().toString();
+                double valor = Double.parseDouble(String.valueOf(stringMonetarioToDouble(str)));
                 String empresa = txtEmpresa.getText().toString();
 
                 DividaDao dao = new DividaDao(getBaseContext());
@@ -79,12 +82,12 @@ public class CadastrarDividasActivity extends AppCompatActivity {
 
     }
 
-   
+
     private void loadComponents() {
-        txtTitulo = (TextView) findViewById(R.id.cadastrarDividas_edt_titulo);
-        txtDescricao = (TextView) findViewById(R.id.cadastrarDividas_edt_descricao);
-        txtValor = (TextView) findViewById(R.id.cadastrarDividas_edt_valor);
-        txtEmpresa = (TextView) findViewById(R.id.cadastrarDividas_edt_empresa);
+        txtTitulo = (EditText) findViewById(R.id.cadastrarDividas_edt_titulo);
+        txtDescricao = (EditText) findViewById(R.id.cadastrarDividas_edt_descricao);
+        txtValor = (EditText) findViewById(R.id.cadastrarDividas_edt_valor);
+        txtEmpresa = (EditText) findViewById(R.id.cadastrarDividas_edt_empresa);
         btnCadastrar = (Button) findViewById(R.id.cadastrarDividas_btn_cadastrar);
         btnCancelar = (Button) findViewById(R.id.cadastrarDividas_btn_cancelar);
 
@@ -100,5 +103,31 @@ public class CadastrarDividasActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private Double stringMonetarioToDouble(String str) {
+        double retorno = 0;
+        try {
+            boolean hasMask = ((str.indexOf("R$") > -1 || str.indexOf("$") > -1) && (str
+                    .indexOf(".") > -1 || str.indexOf(",") > -1));
+            // Verificamos se existe máscara
+            if (hasMask) {
+                // Retiramos a máscara.
+                str = str.replaceAll("[R$]", "").replaceAll("\\,\\w+", "")
+                        .replaceAll("\\.\\w+", "");
+            }
+            // Transformamos o número que está escrito no EditText em
+            // double.
+            retorno = Double.parseDouble(str);
+
+        } catch (NumberFormatException e) {
+
+            //TRATAR EXCEÇÃO
+
+        }
+
+        return retorno;
+
     }
 }
