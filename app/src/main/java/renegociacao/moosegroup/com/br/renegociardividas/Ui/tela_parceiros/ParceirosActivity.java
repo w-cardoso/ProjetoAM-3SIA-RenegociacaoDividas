@@ -105,6 +105,7 @@ public class ParceirosActivity extends AppCompatActivity {
     private void openWhatsApp(String telefone) {
         Uri uri = Uri.parse("smsto:" + telefone);
         Intent whats = new Intent(Intent.ACTION_SENDTO, uri);
+        //whats.putExtra(Intent.EXTRA_TEXT, "Gostaria de negociar minhas dividas");
         whats.setPackage("com.whatsapp");
         startActivity(Intent.createChooser(whats, null));
     }

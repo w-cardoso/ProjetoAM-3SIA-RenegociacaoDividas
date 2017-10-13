@@ -17,12 +17,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import java.math.RoundingMode;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.List;
-
-import renegociacao.moosegroup.com.br.renegociardividas.Model.DividaModel;
+import renegociacao.moosegroup.com.br.renegociardividas.Dao.DbHelper;
+import renegociacao.moosegroup.com.br.renegociardividas.Dao.DividaDao;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.cadastrar_dividas.CadastrarDividasActivity;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_parceiros.ParceirosActivity;
@@ -34,6 +30,8 @@ public class DividasActivity extends AppCompatActivity
     private Context context;
     private TextView txtValorTotal;
     double total;
+    private String titulo, descricao, empresa;
+    private double valor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,25 +49,25 @@ public class DividasActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        final List<DividaModel> rowListItem = getAllItemList();
-        lLayout = new LinearLayoutManager(DividasActivity.this);
-
         RecyclerView rView = (RecyclerView) findViewById(R.id.recycler_view);
+        lLayout = new LinearLayoutManager(DividasActivity.this);
         rView.setLayoutManager(lLayout);
 
-        RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(DividasActivity.this, rowListItem);
+        DividaDao dao = new DividaDao(this);
+        RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(dao.retornarTodos());
         rView.setAdapter(rcAdapter);
+
 
         txtValorTotal = (TextView) findViewById(R.id.telaInicial_txt_total);
 
 
 
-        for (int i = 0; i < rowListItem.size(); i++) {
-            total += rowListItem.get(i).getValor();
-        }
+        //for (int i = 0; i < rowListItem.size(); i++) {
+           // total += rowListItem.get(i).getValor();
+       // }
 
-        String resultado = String.format("%.2f", total);
-        txtValorTotal.setText("R$ "+resultado);
+       // String resultado = String.format("%.2f", total);
+       // txtValorTotal.setText("R$ "+resultado);
 
         rView.addOnItemTouchListener(new RecyclerItemClickListener(context, rView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
@@ -77,7 +75,7 @@ public class DividasActivity extends AppCompatActivity
 
                 final AlertDialog.Builder builder = new AlertDialog.Builder(DividasActivity.this);
                 builder.setTitle("Descrição");
-                builder.setMessage(rowListItem.get(position).getDescricao());
+                builder.setMessage("COnseguiuuu");
                 builder.setPositiveButton("Negociar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -116,7 +114,6 @@ public class DividasActivity extends AppCompatActivity
         }
     }
 
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -145,15 +142,5 @@ public class DividasActivity extends AppCompatActivity
         return true;
     }
 
-    private List<DividaModel> getAllItemList() {
-        List<DividaModel> allItems = new ArrayList<DividaModel>();
-        allItems.add(new DividaModel("Cartão de Crédito", "Conta não paga a 1 ano", 329.71, "www.bradesco.com.br"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Chaves do apartamento atrasado a 3 meses", 22252.32, "www.caixa.com.br"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Emprestimo consignado", 122.98, "www.itau.com.br"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Ewmprestimo realizado em 2015", 1234.41, "www.crefisa.com.br"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Cartão de crédito referente ao mes 10/2015", 1222.44, "www.santander.com.br"));
-        allItems.add(new DividaModel("Cartão de Crédito", "Fatura da Net nãop paga em 2016", 500.09, "www.net.com.br"));
 
-        return allItems;
-    }
 }

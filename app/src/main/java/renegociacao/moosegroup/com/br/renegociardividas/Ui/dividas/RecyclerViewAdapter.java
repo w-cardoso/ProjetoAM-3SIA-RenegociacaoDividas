@@ -24,6 +24,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         this.context = context;
     }
 
+    public RecyclerViewAdapter(List<DividaModel> dividaModels) {
+        this.itemList =  dividaModels;
+    }
+
     @Override
     public RecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_adapter, null);

@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnEntrar;
     private TextView txtCadastrar;
     private static String token;
+    private static int id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +80,17 @@ public class MainActivity extends AppCompatActivity {
                         public void onResponse(Call<User> call, Response<User> response) {
                             if (response.isSuccessful()) {
                                 Toast.makeText(MainActivity.this, response.body().getToken(), Toast.LENGTH_SHORT).show();
+
                                 token = response.body().getToken();
-                                SharedPreferences sp = getPreferences(MODE_PRIVATE);
-                                SharedPreferences.Editor e = sp.edit();
-                                e.putString("token", response.body().getToken());
-                                e.commit();
+                                id = response.body().getId();
+
+                                SharedPreferences.Editor sp = getSharedPreferences("sp", MODE_PRIVATE).edit();
+
+                                sp.putString("token", response.body().getToken());
+                                sp.putInt("user_id", id);
+                                sp.commit();
+
+
                                 Intent telaEntrar = new Intent(MainActivity.this, DividasActivity.class);
                                 startActivity(telaEntrar);
                             } else {
