@@ -15,6 +15,7 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder {
     public TextView txtTitulo;
     public TextView txtValor;
     public TextView txtUrl;
+    public TextView txtId;
     private Context context;
 
 
@@ -24,6 +25,6 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder {
         txtTitulo = (TextView) itemView.findViewById(R.id.cardView_txtTitulo);
         txtValor = (TextView) itemView.findViewById(R.id.cardView_txtValor);
         txtUrl = (TextView) itemView.findViewById(R.id.cardView_txtUrl);
-
+        txtId = (TextView) itemView.findViewById(R.id.cardView_id);
     }
 }

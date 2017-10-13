@@ -40,7 +40,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         holder.txtTitulo.setText(itemList.get(position).getTitulo());
         holder.txtValor.setText("R$ " + Double.toString(itemList.get(position).getValor()));
         holder.txtUrl.setText(itemList.get(position).getEmpresa());
-
+        holder.txtId.setText(Long.toString(itemList.get(position).getId()));
     }
 
     @Override

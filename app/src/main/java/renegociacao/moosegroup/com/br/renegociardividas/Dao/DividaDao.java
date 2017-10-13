@@ -16,7 +16,8 @@ import renegociacao.moosegroup.com.br.renegociardividas.Model.DividaModel;
 public class DividaDao {
     public static final String TABELA_NOME = "dividas";
     private DbGateway gw;
-    private int usuario;
+
+    double total;
 
 
     public DividaDao(Context ctx) {
@@ -34,11 +35,11 @@ public class DividaDao {
         return gw.getDatabase().insert(TABELA_NOME, null, cv) > 0;
     }
 
-    public List<DividaModel> retornarTodos() {
+    public List<DividaModel> listarPorUsuario(int usuarioId) {
         List<DividaModel> dividas = new ArrayList<>();
 
 
-        Cursor cursor = gw.getDatabase().rawQuery("SELECT * FROM dividas", null);
+        Cursor cursor = gw.getDatabase().rawQuery("SELECT * FROM dividas WHERE user_id = " + usuarioId, null);
         while (cursor.moveToNext()) {
             Long id = cursor.getLong(cursor.getColumnIndex("id"));
             int user_id = cursor.getInt(cursor.getColumnIndex("user_id"));
@@ -48,8 +49,23 @@ public class DividaDao {
             String empresa = cursor.getString(cursor.getColumnIndex("empresa"));
             dividas.add(new DividaModel(id, user_id, titulo, descricao, valor, empresa));
 
+            total += valor;
         }
         cursor.close();
         return dividas;
+    }
+
+    public double somarDividas(){
+        return total;
+    }
+
+    public String pegarDescricao(long id) {
+        String  descricao = null;
+        Cursor cursor = gw.getDatabase().rawQuery("SELECT descricao FROM dividas WHERE id = " + id, null);
+        while (cursor.moveToNext()){
+            descricao = cursor.getString(cursor.getColumnIndex("descricao"));
+        }
+        cursor.close();
+        return descricao;
     }
 }

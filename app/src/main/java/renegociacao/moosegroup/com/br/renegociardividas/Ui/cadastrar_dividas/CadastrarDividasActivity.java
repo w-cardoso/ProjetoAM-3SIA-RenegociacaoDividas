@@ -51,7 +51,7 @@ public class CadastrarDividasActivity extends AppCompatActivity {
                 user_id = sp.getInt("user_id", 0);
                 String titulo = txtTitulo.getText().toString();
                 String descricao = txtDescricao.getText().toString();
-                double valor = Double.parseDouble(String.valueOf(stringMonetarioToDouble(str)));
+                double valor = stringMonetarioToDouble(str);
                 String empresa = txtEmpresa.getText().toString();
 
                 DividaDao dao = new DividaDao(getBaseContext());
@@ -114,8 +114,9 @@ public class CadastrarDividasActivity extends AppCompatActivity {
             // Verificamos se existe máscara
             if (hasMask) {
                 // Retiramos a máscara.
-                str = str.replaceAll("[R$]", "").replaceAll("\\,\\w+", "")
-                        .replaceAll("\\.\\w+", "");
+                //str = str.replaceAll("[R$]", "").replaceAll("\\,\\w+", ".").replaceAll("\\.\\w+", "");
+
+                str = str.replaceAll("R\\$", "").replaceAll("\\.", "").replaceAll(",", ".");
             }
             // Transformamos o número que está escrito no EditText em
             // double.

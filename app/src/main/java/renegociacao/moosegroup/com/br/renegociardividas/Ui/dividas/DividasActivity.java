@@ -3,6 +3,7 @@ package renegociacao.moosegroup.com.br.renegociardividas.Ui.dividas;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import renegociacao.moosegroup.com.br.renegociardividas.Dao.DbHelper;
 import renegociacao.moosegroup.com.br.renegociardividas.Dao.DividaDao;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.cadastrar_dividas.CadastrarDividasActivity;
@@ -35,6 +35,9 @@ public class DividasActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences sp = getSharedPreferences("sp", MODE_PRIVATE);
+        int userId = sp.getInt("user_id", 0);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -54,28 +57,31 @@ public class DividasActivity extends AppCompatActivity
         rView.setLayoutManager(lLayout);
 
         DividaDao dao = new DividaDao(this);
-        RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(dao.retornarTodos());
+
+        RecyclerViewAdapter rcAdapter = new RecyclerViewAdapter(dao.listarPorUsuario(userId));
         rView.setAdapter(rcAdapter);
 
 
         txtValorTotal = (TextView) findViewById(R.id.telaInicial_txt_total);
 
 
-
-        //for (int i = 0; i < rowListItem.size(); i++) {
-           // total += rowListItem.get(i).getValor();
-       // }
-
-       // String resultado = String.format("%.2f", total);
-       // txtValorTotal.setText("R$ "+resultado);
+        String resultado = String.format("%.2f", dao.somarDividas());
+        txtValorTotal.setText("R$ " + resultado);
 
         rView.addOnItemTouchListener(new RecyclerItemClickListener(context, rView, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
 
+                DividaDao dao = new DividaDao(getApplicationContext());
+
+                TextView txtId = (TextView) view.findViewById(R.id.cardView_id);
+                long id = Long.parseLong(txtId.getText().toString());
+                dao.pegarDescricao(id);
+
+
                 final AlertDialog.Builder builder = new AlertDialog.Builder(DividasActivity.this);
                 builder.setTitle("Descrição");
-                builder.setMessage("COnseguiuuu");
+                builder.setMessage(dao.pegarDescricao(id));
                 builder.setPositiveButton("Negociar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
