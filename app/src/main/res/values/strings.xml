@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Divida Zero</string>
+    <string name="app_name">Dívida Zero</string>
     <string name="main_edt_cpf">CPF</string>
     <string name="main_edt_senha">Senha</string>
     <string name="main_edt_entrar">Entrar</string>

@@ -21,6 +21,7 @@ import android.widget.TextView;
 import renegociacao.moosegroup.com.br.renegociardividas.Dao.DividaDao;
 import renegociacao.moosegroup.com.br.renegociardividas.R;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.cadastrar_dividas.CadastrarDividasActivity;
+import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_acesso.MainActivity;
 import renegociacao.moosegroup.com.br.renegociardividas.Ui.tela_parceiros.ParceirosActivity;
 
 public class DividasActivity extends AppCompatActivity
@@ -139,8 +140,8 @@ public class DividasActivity extends AppCompatActivity
             startActivity(listaDividas);
 
         } else if (id == R.id.nav_manage) {
-            android.os.Process.killProcess(android.os.Process.myPid());
-            System.exit(1);
+            Intent listaDividas = new Intent(DividasActivity.this, MainActivity.class);
+            startActivity(listaDividas);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

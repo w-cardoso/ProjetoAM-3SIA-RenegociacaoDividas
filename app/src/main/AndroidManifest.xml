@@ -21,8 +21,6 @@
         </activity>
         <activity android:name=".Ui.cadastrar_cliente.TelaCadastroActivity" />
         <activity android:name=".Ui.tela_acesso.MainActivity" />
-        <activity android:name=".Ui.lista_dividas.ListaDividasActivity" />
-        <activity android:name=".Ui.tela_menu.MenuActivity" />
         <activity android:name=".Ui.cadastrar_dividas.CadastrarDividasActivity" />
         <activity android:name=".Ui.tela_parceiros.ParceirosActivity" />
         <activity

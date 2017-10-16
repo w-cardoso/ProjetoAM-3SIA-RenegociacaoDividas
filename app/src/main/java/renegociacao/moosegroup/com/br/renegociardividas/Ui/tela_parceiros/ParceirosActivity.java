@@ -127,18 +127,18 @@ public class ParceirosActivity extends AppCompatActivity {
         listaParceiros.add(parceiros);
 
 
-        parceiros = new ListaParceiros("Banco do Brasil", "37.469.722/0001-08", "(91)3898-1450");
+        parceiros = new ListaParceiros("Banco do Brasil", "37.469.722/0001-08", "(91) 3898-1450");
         listaParceiros.add(parceiros);
 
-        parceiros = new ListaParceiros("Simplic", "01.787.653/0001-25", "(83)2991-3498");
-        listaParceiros.add(parceiros);
-
-
-        parceiros = new ListaParceiros("Losango", "19.647.376/0001-10", "(81)2558-6638");
+        parceiros = new ListaParceiros("Simplic", "01.787.653/0001-25", "(83) 2991-3498");
         listaParceiros.add(parceiros);
 
 
-        parceiros = new ListaParceiros("BV Financeira", "38.383.579/0001-91", "(11)2907-2154");
+        parceiros = new ListaParceiros("Losango", "19.647.376/0001-10", "(81) 2558-6638");
+        listaParceiros.add(parceiros);
+
+
+        parceiros = new ListaParceiros("BV Financeira", "38.383.579/0001-91", "(11) 2907-2154");
         listaParceiros.add(parceiros);
 
 
